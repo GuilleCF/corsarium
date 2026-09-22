@@ -23,6 +23,6 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
-# AI agent intruction files
+# AI agent instruction files
 AGENTS.md
 CLAUDE.md
