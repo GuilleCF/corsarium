@@ -1,1 +1,46 @@
 @import "tailwindcss";
+
+@theme {
+
+    /* Dark palette */
+    --color-abyss: #0A1112;
+    --color-deep-water: #0F1C1D;
+    --color-ocean: #142627;
+    --color-tide: #284344;
+    --color-glow: #57D6C4;
+    --color-foam: #B8F1E7;
+    --color-brass: #D0A957;
+    --color-sand: #E7D29B;
+    --color-mist: #E8F0EF;
+    --color-drift: #9AAEAD;
+
+    /* Light palette (default) */
+    --color-background: #F7FAFA;
+    --color-surface: #FFFFFF;
+    --color-surface-alt: #EAF4F2;
+    --color-border: #D3E0DE;
+    --color-foreground: #0A1112;
+    --color-foreground-secondary: #284344;
+    --color-foreground-muted: #5E7372;
+    --color-accent: #0E7C70;
+    --color-accent-hover: #0A5F56;
+    --color-accent-secondary: #8C6A1F;
+    --color-highlight: #D4F5EF;
+    --color-highlight-warm: #F3E8C8;
+}
+
+:root[data-theme="dark"] {
+    --color-background: var(--color-abyss);
+    --color-surface: var(--color-deep-water);
+    --color-surface-alt: var(--color-ocean);
+    --color-border: var(--color-tide);
+    --color-foreground: var(--color-mist);
+    --color-foreground-secondary: var(--color-foam);
+    --color-foreground-muted: var(--color-drift);
+    --color-accent: var(--color-glow);
+    --color-accent-hover: #7EE4D6;
+    --color-accent-secondary: var(--color-brass);
+    --color-highlight: var(--color-foam);
+    --color-highlight-warm: var(--color-sand);
+}
+
