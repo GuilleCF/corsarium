@@ -16,7 +16,19 @@ const { title, description } = Astro.props;
 <html lang="en">
     <head>
         <meta charset="utf-8" />
-        <script is:inline src="/theme-init.js"></script>
+        <script is:inline>
+            const stored = localStorage.getItem("theme");
+            const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+            const theme =
+                stored === "dark" || stored === "light"
+                    ? stored
+                    : prefersDark
+                        ? "dark"
+                        : "light";
+
+            document.documentElement.setAttribute("data-theme", theme);
+        </script>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="icon" href="/favicon.ico" />
         <meta name="description" content={description} />
