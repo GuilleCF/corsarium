@@ -9,7 +9,7 @@
     aria-label="Toggle color theme"
 >
     <svg
-        class="icon-sun col-start-1 row-start-1 h-5 w-5 transition-[opacity,transform] duration-100 motion-reduce:transition-none"
+        class="icon-sun col-start-1 row-start-1 h-5 w-5 scale-75 opacity-0 transition-[opacity,transform] duration-100 motion-reduce:transition-none"
         aria-hidden="true"
         focusable="false"
         xmlns="http://www.w3.org/2000/svg"
@@ -44,6 +44,18 @@
     </svg>
 </button>
 
+<style>
+    :root[data-theme="dark"] .icon-moon {
+        opacity: 0;
+        transform: scale(0.75);
+    }
+
+    :root[data-theme="dark"] .icon-sun {
+        opacity: 1;
+        transform: scale(1);
+    }
+</style>
+
 <script>
     function currentTheme(): "light" | "dark" {
         return document.documentElement.getAttribute("data-theme") === "dark"
@@ -60,22 +72,6 @@
                 ? "Switch to light theme"
                 : "Switch to dark theme"
         );
-
-        button
-            .querySelector(".icon-sun")
-            ?.classList.toggle("opacity-0", isDark);
-
-        button
-            .querySelector(".icon-sun")
-            ?.classList.toggle("scale-75", isDark);
-
-        button
-            .querySelector(".icon-moon")
-            ?.classList.toggle("opacity-0", !isDark);
-
-        button
-            .querySelector(".icon-moon")
-            ?.classList.toggle("scale-75", !isDark);
     }
 
     function syncAll(theme: "light" | "dark") {
