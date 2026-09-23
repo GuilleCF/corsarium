@@ -27,6 +27,18 @@
     --color-accent-secondary: #8C6A1F;
     --color-highlight: #D4F5EF;
     --color-highlight-warm: #F3E8C8;
+
+    --font-sans: "Inter Variable", system-ui, sans-serif;
+    --font-display: "Space Grotesk Variable", system-ui, sans-serif;
+    --font-mono: "Fira Code Variable", ui-monospace, monospace;
+}
+
+body {
+    font-family: var(--font-sans);
+}
+
+code, pre, kbd, samp {
+    font-family: var(--font-mono);
 }
 
 :root[data-theme="dark"] {
