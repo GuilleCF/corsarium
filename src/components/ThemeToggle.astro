@@ -7,7 +7,6 @@
     type="button"
     class="theme-toggle inline-flex items-center justify-center rounded-full p-2 text-foreground hover:bg-surface-alt"
     aria-label="Toggle color theme"
-    aria-pressed="false"
 >
     <svg class="icon-sun h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
         <circle cx="12" cy="12" r="5"></circle>
@@ -27,17 +26,34 @@
 
 <script>
     function currentTheme(): "light" | "dark" {
-        return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light";
+        return document.documentElement.getAttribute("data-theme") === "dark"
+            ? "dark"
+            : "light";
     }
 
     function syncButton(button: Element, theme: "light" | "dark") {
-        button.setAttribute("aria-pressed", String(theme === "dark"));
-        button.querySelector(".icon-sun")?.toggleAttribute("hidden", theme === "dark");
-        button.querySelector(".icon-moon")?.toggleAttribute("hidden", theme !== "dark");
+        const isDark = theme === "dark";
+
+        button.setAttribute(
+            "aria-label",
+            isDark
+                ? "Switch to light theme"
+                : "Switch to dark theme"
+        );
+
+        button
+            .querySelector(".icon-sun")
+            ?.toggleAttribute("hidden", isDark);
+
+        button
+            .querySelector(".icon-moon")
+            ?.toggleAttribute("hidden", !isDark);
     }
 
     function syncAll(theme: "light" | "dark") {
-        document.querySelectorAll(".theme-toggle").forEach((button) => syncButton(button, theme));
+        document
+            .querySelectorAll(".theme-toggle")
+            .forEach((button) => syncButton(button, theme));
     }
 
     function applyTheme(theme: "light" | "dark") {
@@ -50,7 +66,11 @@
 
     document.querySelectorAll(".theme-toggle").forEach((button) => {
         button.addEventListener("click", () => {
-            applyTheme(currentTheme() === "dark" ? "light" : "dark");
+            applyTheme(
+                currentTheme() === "dark"
+                    ? "light"
+                    : "dark"
+            );
         });
     });
 </script>
