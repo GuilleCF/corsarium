@@ -5,10 +5,20 @@
 
 <button
     type="button"
-    class="theme-toggle inline-flex items-center justify-center rounded-full p-2 text-foreground hover:bg-surface-alt"
+    class="theme-toggle grid h-9 w-9 place-items-center rounded-full text-foreground hover:bg-surface-alt"
     aria-label="Toggle color theme"
 >
-    <svg class="icon-sun h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <svg
+        class="icon-sun col-start-1 row-start-1 h-5 w-5 transition-[opacity,transform] duration-100 motion-reduce:transition-none"
+        aria-hidden="true"
+        focusable="false"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+    >
         <circle cx="12" cy="12" r="5"></circle>
         <line x1="12" y1="1" x2="12" y2="3"></line>
         <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -19,7 +29,17 @@
         <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
     </svg>
-    <svg class="icon-moon h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" hidden>
+    <svg
+        class="icon-moon col-start-1 row-start-1 h-5 w-5 transition-[opacity,transform] duration-100 motion-reduce:transition-none"
+        aria-hidden="true"
+        focusable="false"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+    >
         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"></path>
     </svg>
 </button>
@@ -43,11 +63,19 @@
 
         button
             .querySelector(".icon-sun")
-            ?.toggleAttribute("hidden", isDark);
+            ?.classList.toggle("opacity-0", isDark);
+
+        button
+            .querySelector(".icon-sun")
+            ?.classList.toggle("scale-75", isDark);
 
         button
             .querySelector(".icon-moon")
-            ?.toggleAttribute("hidden", !isDark);
+            ?.classList.toggle("opacity-0", !isDark);
+
+        button
+            .querySelector(".icon-moon")
+            ?.classList.toggle("scale-75", !isDark);
     }
 
     function syncAll(theme: "light" | "dark") {
