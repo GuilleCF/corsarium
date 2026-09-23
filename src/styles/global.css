@@ -25,6 +25,7 @@
     --color-accent: #0E7C70;
     --color-accent-hover: #0A5F56;
     --color-accent-secondary: #8C6A1F;
+    --color-accent-secondary-hover: #705519;
     --color-highlight: #D4F5EF;
     --color-highlight-warm: #F3E8C8;
 
@@ -52,6 +53,7 @@ code, pre, kbd, samp {
     --color-accent: var(--color-glow);
     --color-accent-hover: #7EE4D6;
     --color-accent-secondary: var(--color-brass);
+    --color-accent-secondary-hover: #D7B670;
     --color-highlight: var(--color-foam);
     --color-highlight-warm: var(--color-sand);
 }
