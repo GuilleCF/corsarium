@@ -34,6 +34,10 @@
     --font-mono: "Fira Code Variable", ui-monospace, monospace;
 }
 
+:root {
+    color-scheme: light;
+}
+
 body {
     font-family: var(--font-sans);
 }
@@ -43,6 +47,7 @@ code, pre, kbd, samp {
 }
 
 :root[data-theme="dark"] {
+    color-scheme: dark;
     --color-background: var(--color-abyss);
     --color-surface: var(--color-deep-water);
     --color-surface-alt: var(--color-ocean);
