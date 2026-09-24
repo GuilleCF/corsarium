@@ -7,7 +7,6 @@ import ThemeToggle from "@/components/ThemeToggle.astro"
 <header class="bg-background">
     <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
         <a href="/" class="text-lg font-semibold text-foreground">Corsarium</a>
-
         <div class="hidden items-center gap-6 md:flex">
             <nav aria-label="Primary">
                 <ul class="flex items-center gap-6">
@@ -19,32 +18,32 @@ import ThemeToggle from "@/components/ThemeToggle.astro"
                 </ul>
             </nav>
             <ThemeToggle />
-            </div>
+        </div>
 
-            <button
-                id="mobile-menu-button"
-                type="button"
-                class="-mr-2.5 grid h-11 w-11 place-items-center rounded-full text-foreground hover:bg-surface-alt md:hidden"
-                aria-expanded="false"
-                aria-controls="mobile-menu"
-                aria-label="Open menu"
+        <button
+            id="mobile-menu-button"
+            type="button"
+            class="-mr-2.5 grid h-11 w-11 place-items-center rounded-full text-foreground hover:bg-surface-alt md:hidden"
+            aria-expanded="false"
+            aria-controls="mobile-menu"
+            aria-label="Open menu"
+        >
+            <svg
+                class="h-6 w-6"
+                aria-hidden="true"
+                focusable="false"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
             >
-                <svg
-                    class="h-6 w-6"
-                    aria-hidden="true"
-                    focusable="false"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                >
-                    <line x1="3" y1="6" x2="21" y2="6"></line>
-                    <line x1="3" y1="12" x2="21" y2="12"></line>
-                    <line x1="3" y1="18" x2="21" y2="18"></line>
-                </svg>
-            </button>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
     </div>
 
     <nav id="mobile-menu" aria-label="Primary" class="md:hidden" hidden>
