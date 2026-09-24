@@ -38,14 +38,6 @@
     color-scheme: light;
 }
 
-body {
-    font-family: var(--font-sans);
-}
-
-code, pre, kbd, samp {
-    font-family: var(--font-mono);
-}
-
 :root[data-theme="dark"] {
     color-scheme: dark;
     --color-background: var(--color-abyss);
@@ -62,4 +54,3 @@ code, pre, kbd, samp {
     --color-highlight: var(--color-foam);
     --color-highlight-warm: var(--color-sand);
 }
-
