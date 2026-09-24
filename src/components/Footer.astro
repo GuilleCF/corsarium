@@ -1,0 +1,30 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-surface-alt">
+    <div class="mx-auto flex max-w-6xl flex-col gap-6 px-4 py-10 md:flex-row md:items-start md:justify-between">
+        <div class="max-w-sm">
+            <a href="/" class="text-lg font-semibold text-foreground">Corsarium</a>
+            <p class="mt-2 text-sm text-foreground-muted">
+                An open educational platform for learning bioinformatics, with a focus on structural bioinformatics.
+            </p>
+        </div>
+
+        <nav aria-label="Footer">
+            <ul class="flex flex-wrap gap-x-6 gap-y-2 text-sm">
+                <li><a href="/paths" class="text-foreground-secondary hover:text-foreground">All Paths</a></li>
+                <li><a href="/about" class="text-foreground-secondary hover:text-foreground">About</a></li>
+                <li><a href="/support" class="text-foreground-secondary hover:text-foreground">Support us</a></li>
+                <li><a href="https://github.com/GuilleCF/corsarium" class="text-foreground-secondary hover:text-foreground">Source code</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="mx-auto max-w-6xl px-4 pb-10">
+        <p class="text-sm text-foreground-muted">
+            &copy; {year} Guillermo. Code released under the
+            <a href="https://github.com/GuilleCF/corsarium/blob/main/LICENSE" class="underline hover:text-foreground">MIT License</a>.
+        </p>
+    </div>
+</footer>
