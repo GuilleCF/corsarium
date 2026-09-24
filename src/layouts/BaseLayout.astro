@@ -20,7 +20,13 @@ const { title, description } = Astro.props;
     <head>
         <meta charset="utf-8" />
         <script is:inline>
-            const stored = localStorage.getItem("theme");
+            let stored = null;
+            try {
+                stored = localStorage.getItem("theme");
+            } catch {
+                // Storage blocked: fall back to the OS preference below
+            }
+
             const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
             const theme =

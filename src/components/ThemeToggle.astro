@@ -82,7 +82,11 @@
 
     function applyTheme(theme: "light" | "dark") {
         document.documentElement.setAttribute("data-theme", theme);
-        localStorage.setItem("theme", theme);
+        try {
+            localStorage.setItem("theme", theme);
+        } catch {
+            // Storage blocked: the theme still applies for this page view
+        }
         syncAll(theme);
     }
 
