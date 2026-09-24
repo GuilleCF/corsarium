@@ -1,0 +1,22 @@
+---
+interface Props {
+    tone?: "default" | "alt";
+    labelledby?: string;
+}
+
+const { tone = "default", labelledby } = Astro.props;
+
+// Full class names written out so Tailwind's scanner can find them
+const tones = {
+    default: "bg-background",
+    alt: "bg-surface-alt",
+};
+---
+
+
+
+<section class={tones[tone]} aria-labelledby={labelledby}>
+    <div class="mx-auto max-w-6xl px-4 py-16 sm:py-20">
+        <slot />
+    </div>
+</section>

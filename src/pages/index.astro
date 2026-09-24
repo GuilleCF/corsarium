@@ -1,10 +1,45 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Hero from "@/components/Hero.astro";
+import Section from "@/components/Section.astro";
 ---
-
-
 
 <BaseLayout title="Corsarium | Home" description="An open educational platform for learning bioinformatics, with a focus on structural bioinformatics.">
     <Hero />
+
+    <Section tone="alt" labelledby="learn-heading">
+        <h2 id="learn-heading" class="font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+            What you'll learn
+        </h2>
+        <p class="mt-4 max-w-2xl text-lg text-foreground-muted">
+            [Placeholder] The topic areas of structural bioinformatics covered by Corsarium.
+        </p>
+    </Section>
+
+    <Section labelledby="how-heading">
+        <h2 id="how-heading" class="font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+            How it works
+        </h2>
+        <p class="mt-4 max-w-2xl text-lg text-foreground-muted">
+            [Placeholder] How learning paths are organized, from first steps to advanced topics.
+        </p>
+    </Section>
+
+    <Section tone="alt" labelledby="audience-heading">
+        <h2 id="audience-heading" class="font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+            Who it's for
+        </h2>
+        <p class="mt-4 max-w-2xl text-lg text-foreground-muted">
+            [Placeholder] The learners Corsarium is designed for.
+        </p>
+    </Section>
+
+    <Section labelledby="open-heading">
+        <h2 id="open-heading" class="font-display text-3xl font-semibold tracking-tight text-foreground sm:text-4xl">
+            Open and free
+        </h2>
+        <p class="mt-4 max-w-2xl text-lg text-foreground-muted">
+            [Placeholder] Corsarium is open source. How to contribute or support the project.
+        </p>
+    </Section>
 </BaseLayout>
