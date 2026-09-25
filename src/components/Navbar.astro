@@ -1,5 +1,6 @@
 ---
-import ThemeToggle from "@/components/ThemeToggle.astro"
+import ThemeToggle from "@/components/ThemeToggle.astro";
+import Button from "@/components/Button.astro";
 ---
 
 
@@ -14,12 +15,11 @@ import ThemeToggle from "@/components/ThemeToggle.astro"
                     <li><a href="/about" class="text-foreground-secondary hover:text-foreground">About</a></li>
                     <li><a href="/support" class="text-foreground-secondary hover:text-foreground">Support us</a></li>
                     <li><a href="/sign-in" class="text-foreground-secondary hover:text-foreground">Sign in</a></li>
-                    <li><a href="/paths" class="rounded-full bg-accent px-4 py-1.5 font-medium text-background hover:bg-accent-hover">To set sail</a></li>
+                    <li><Button href="/paths" size="sm">To set sail</Button></li>
                 </ul>
             </nav>
             <ThemeToggle />
         </div>
-
         <button
             id="mobile-menu-button"
             type="button"
@@ -45,14 +45,13 @@ import ThemeToggle from "@/components/ThemeToggle.astro"
             </svg>
         </button>
     </div>
-
     <nav id="mobile-menu" aria-label="Primary" class="md:hidden" hidden>
         <ul class="flex flex-col gap-1 px-4 pb-4">
             <li><a href="/paths" class="block py-2 text-foreground-secondary hover:text-foreground">All Paths</a></li>
             <li><a href="/about" class="block py-2 text-foreground-secondary hover:text-foreground">About</a></li>
             <li><a href="/support" class="block py-2 text-foreground-secondary hover:text-foreground">Support us</a></li>
             <li><a href="/sign-in" class="block py-2 text-foreground-secondary hover:text-foreground">Sign in</a></li>
-            <li><a href="/paths" class="mt-1 inline-block rounded-full bg-accent px-4 py-1.5 font-medium text-background hover:bg-accent-hover">To set sail</a></li>
+            <li><Button href="/paths" size="sm" class="mt-1">To set sail</Button></li>
         </ul>
         <div class="border-t border-border px-4 py-3">
             <ThemeToggle />

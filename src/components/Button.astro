@@ -1,0 +1,26 @@
+---
+interface Props {
+    href: string;
+    size?: "sm" | "md";
+    class?: string;
+}
+
+const { href, size = "md", class: className } = Astro.props;
+
+// Full class names written out so Tailwind's scanner can find them
+const sizes = {
+    sm: "px-4 py-1.5",
+    md: "px-6 py-3",
+};
+---
+
+<a
+    href={href}
+    class:list={[
+        "inline-flex items-center rounded-full bg-accent font-medium text-background transition-colors duration-200 hover:bg-accent-hover focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        sizes[size],
+        className,
+    ]}
+>
+    <slot />
+</a>
