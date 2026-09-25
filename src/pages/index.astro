@@ -12,8 +12,47 @@ import Section from "@/components/Section.astro";
             What you'll learn
         </h2>
         <p class="mt-4 max-w-2xl text-lg text-foreground-muted">
-            [Placeholder] The topic areas of structural bioinformatics covered by Corsarium.
+            Corsarium will cover structural bioinformatics from the foundations to the analyses and tools used in research.
         </p>
+
+        <ul class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <li class="rounded-xl bg-surface p-6">
+                <h3 class="font-display text-xl font-semibold text-foreground">Foundations</h3>
+                <p class="mt-3 text-foreground-muted">
+                    Molecular biology and protein structure, explained from the beginning.
+                </p>
+            </li>
+            <li class="rounded-xl bg-surface p-6">
+                <h3 class="font-display text-xl font-semibold text-foreground">Sequence analysis</h3>
+                <p class="mt-3 text-foreground-muted">
+                    How biological sequences are compared and interpreted.
+                </p>
+            </li>
+            <li class="rounded-xl bg-surface p-6">
+                <h3 class="font-display text-xl font-semibold text-foreground">Structural databases</h3>
+                <p class="mt-3 text-foreground-muted">
+                    Where experimental and predicted structures come from, such as the PDB and AlphaFold.
+                </p>
+            </li>
+            <li class="rounded-xl bg-surface p-6">
+                <h3 class="font-display text-xl font-semibold text-foreground">Molecular visualization</h3>
+                <p class="mt-3 text-foreground-muted">
+                    How to look at molecular structures and read what they show.
+                </p>
+            </li>
+            <li class="rounded-xl bg-surface p-6">
+                <h3 class="font-display text-xl font-semibold text-foreground">Simulation and docking</h3>
+                <p class="mt-3 text-foreground-muted">
+                    How molecules move and interact, studied with molecular dynamics, docking and force fields.
+                </p>
+            </li>
+            <li class="rounded-xl bg-surface p-6">
+                <h3 class="font-display text-xl font-semibold text-foreground">Tools and workflows</h3>
+                <p class="mt-3 text-foreground-muted">
+                    The command line, scientific programming and reproducible workflows behind the analyses.
+                </p>
+            </li>
+        </ul>
     </Section>
 
     <Section labelledby="how-heading">
@@ -21,8 +60,32 @@ import Section from "@/components/Section.astro";
             How it works
         </h2>
         <p class="mt-4 max-w-2xl text-lg text-foreground-muted">
-            [Placeholder] How learning paths are organized, from first steps to advanced topics.
+            Learning paths will be organized from first steps to advanced topics, so you can start where you are.
         </p>
+
+        <ol class="mt-10 grid gap-8 md:grid-cols-3">
+            <li>
+                <span aria-hidden="true" class="font-display text-4xl font-semibold text-accent">1</span>
+                <h3 class="mt-2 font-display text-xl font-semibold text-foreground">Choose a path</h3>
+                <p class="mt-3 text-foreground-muted">
+                    Begin from zero, or jump in at the topic you want to learn or review.
+                </p>
+            </li>
+            <li>
+                <span aria-hidden="true" class="font-display text-4xl font-semibold text-accent">2</span>
+                <h3 class="mt-2 font-display text-xl font-semibold text-foreground">Learn step by step</h3>
+                <p class="mt-3 text-foreground-muted">
+                    Each lesson builds on the previous one, introducing concepts before the tools that use them.
+                </p>
+            </li>
+            <li>
+                <span aria-hidden="true" class="font-display text-4xl font-semibold text-accent">3</span>
+                <h3 class="mt-2 font-display text-xl font-semibold text-foreground">Apply the tools</h3>
+                <p class="mt-3 text-foreground-muted">
+                    Work through different analyses and the tools used to run them.
+                </p>
+            </li>
+        </ol>
     </Section>
 
     <Section tone="alt" labelledby="audience-heading">
@@ -30,8 +93,23 @@ import Section from "@/components/Section.astro";
             Who it's for
         </h2>
         <p class="mt-4 max-w-2xl text-lg text-foreground-muted">
-            [Placeholder] The learners Corsarium is designed for.
+            Corsarium will guide you through structural bioinformatics, whether you are just starting out or already working in the field.
         </p>
+
+        <ul class="mt-10 grid gap-6 md:grid-cols-2">
+            <li class="rounded-xl bg-surface p-6">
+                <h3 class="font-display text-xl font-semibold text-foreground">New to the field</h3>
+                <p class="mt-3 text-foreground-muted">
+                    Start with no prior knowledge. Corsarium will guide you step by step, from the first concepts to the different analyses and tools researchers use.
+                </p>
+            </li>
+            <li class="rounded-xl bg-surface p-6">
+                <h3 class="font-display text-xl font-semibold text-foreground">Already working in the field</h3>
+                <p class="mt-3 text-foreground-muted">
+                    Learn new analyses and tools, or cross-check what you already know against a clear, structured guide.
+                </p>
+            </li>
+        </ul>
     </Section>
 
     <Section labelledby="open-heading">
@@ -39,7 +117,14 @@ import Section from "@/components/Section.astro";
             Open and free
         </h2>
         <p class="mt-4 max-w-2xl text-lg text-foreground-muted">
-            [Placeholder] Corsarium is open source. How to contribute or support the project.
+            Corsarium is open source and free to use. The code is public on GitHub under the MIT License, and you can follow the project, report problems or contribute.
         </p>
+
+        <a
+            href="https://github.com/GuilleCF/corsarium"
+            class="mt-8 inline-flex items-center rounded-full bg-accent px-6 py-3 font-medium text-background transition-colors duration-200 hover:bg-accent-hover focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background"
+        >
+            View the source code
+        </a>
     </Section>
 </BaseLayout>
