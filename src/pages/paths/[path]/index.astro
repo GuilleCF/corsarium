@@ -1,0 +1,44 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { paths } from "@/data/paths";
+
+export async function getStaticPaths() {
+    return Object.keys(paths).map((path) => ({ params: { path } }));
+}
+
+const { path } = Astro.params;
+const meta = paths[path];
+
+if (!meta) {
+    throw new Error(`No path metadata found for "${path}"`);
+}
+
+const lessons = (await getCollection("lessons", (entry) => entry.data.path === path)).sort(
+    (a, b) => a.data.order - b.data.order,
+);
+---
+
+<BaseLayout title={`Corsarium | ${meta.title}`} description={meta.description}>
+    <section class="mx-auto max-w-6xl px-4 py-16 sm:py-20">
+        <h1 class="font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+            {meta.title}
+        </h1>
+        <p class="mt-4 max-w-2xl text-lg text-foreground-muted">
+            {meta.description}
+        </p>
+
+        <ol class="mt-10 flex flex-col gap-2">
+            {lessons.map((lesson) => (
+                <li>
+                    <a
+                        href={`/paths/${path}/${lesson.id}`}
+                        class="text-foreground-secondary hover:text-foreground"
+                    >
+                        {lesson.data.order}. {lesson.data.title}
+                    </a>
+                </li>
+            ))}
+        </ol>
+    </section>
+</BaseLayout>

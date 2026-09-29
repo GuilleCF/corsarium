@@ -1,0 +1,32 @@
+---
+import { getCollection, render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+
+interface Props {
+    lesson: CollectionEntry<"lessons">;
+}
+
+export async function getStaticPaths() {
+    const lessons = await getCollection("lessons");
+
+    return lessons.map((lesson) => ({
+        params: { path: lesson.data.path, lesson: lesson.id },
+        props: { lesson },
+    }));
+}
+
+const { lesson } = Astro.props;
+const { Content } = await render(lesson);
+---
+
+<BaseLayout title={`Corsarium | ${lesson.data.title}`} description={lesson.data.description}>
+    <article class="mx-auto max-w-3xl px-4 py-16 sm:py-20">
+        <h1 class="font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+            {lesson.data.title}
+        </h1>
+        <div class="mt-8 text-foreground">
+            <Content />
+        </div>
+    </article>
+</BaseLayout>

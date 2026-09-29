@@ -1,0 +1,30 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import { paths } from "@/data/paths";
+
+const entries = Object.entries(paths);
+---
+
+
+
+<BaseLayout title="Corsarium | All Paths" description="Browse all Corsarium learning paths.">
+    <section class="mx-auto max-w-6xl px-4 py-16 sm:py-20">
+        <h1 class="font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+            All Paths
+        </h1>
+        <p class="mt-4 max-w-2xl text-lg text-foreground-muted">
+            Choose a path to start learning.
+        </p>
+
+        <ul class="mt-10 grid gap-6 sm:grid-cols-2">
+            {entries.map(([slug, meta]) => (
+                <li class="rounded-xl bg-surface p-6">
+                    <h2 class="font-display text-xl font-semibold text-foreground">
+                        <a href={`/paths/${slug}`} class="hover:text-accent">{meta.title}</a>
+                    </h2>
+                    <p class="mt-3 text-foreground-muted">{meta.description}</p>
+                </li>
+            ))}
+        </ul>
+    </section>
+</BaseLayout>
