@@ -1,71 +1,89 @@
 ---
 import ThemeToggle from "@/components/ThemeToggle.astro";
 import Button from "@/components/Button.astro";
+
+const links = [
+    { href: "/paths", label: "All Paths" },
+    { href: "/about", label: "About" },
+    { href: "/support", label: "Support us" },
+    { href: "/sign-in", label: "Sign in" },
+];
 ---
 
 
 
-<header class="bg-background">
+<header class="relative bg-background">
     <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
         <a href="/" class="text-lg font-semibold text-foreground">Corsarium</a>
         <div class="hidden items-center gap-6 md:flex">
             <nav aria-label="Primary">
                 <ul class="flex items-center gap-6">
-                    <li><a href="/paths" class="text-foreground-secondary hover:text-foreground">All Paths</a></li>
-                    <li><a href="/about" class="text-foreground-secondary hover:text-foreground">About</a></li>
-                    <li><a href="/support" class="text-foreground-secondary hover:text-foreground">Support us</a></li>
-                    <li><a href="/sign-in" class="text-foreground-secondary hover:text-foreground">Sign in</a></li>
+                    {links.map((link) => (
+                        <li><a href={link.href} class="text-foreground-secondary hover:text-foreground">{link.label}</a></li>
+                    ))}
                     <li><Button href="/paths" size="sm">To set sail</Button></li>
                 </ul>
             </nav>
             <ThemeToggle />
         </div>
-        <button
-            id="mobile-menu-button"
-            type="button"
-            class="-mr-2.5 grid h-11 w-11 place-items-center rounded-full text-foreground hover:bg-surface-alt md:hidden"
-            aria-expanded="false"
-            aria-controls="mobile-menu"
-            aria-label="Open menu"
-        >
-            <svg
-                class="h-6 w-6"
-                aria-hidden="true"
-                focusable="false"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
+        <details class="md:hidden">
+            <summary
+                class="-mr-2.5 grid h-11 w-11 list-none place-items-center rounded-full text-foreground hover:bg-surface-alt [&::-webkit-details-marker]:hidden"
             >
-                <line x1="3" y1="6" x2="21" y2="6"></line>
-                <line x1="3" y1="12" x2="21" y2="12"></line>
-                <line x1="3" y1="18" x2="21" y2="18"></line>
-            </svg>
-        </button>
+                <span class="sr-only">Menu</span>
+                <svg
+                    class="icon-menu col-start-1 row-start-1 h-6 w-6 transition-[opacity,transform] duration-100 motion-reduce:transition-none"
+                    aria-hidden="true"
+                    focusable="false"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                >
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <line x1="3" y1="12" x2="21" y2="12"></line>
+                    <line x1="3" y1="18" x2="21" y2="18"></line>
+                </svg>
+                <svg
+                    class="icon-close col-start-1 row-start-1 h-6 w-6 scale-75 opacity-0 transition-[opacity,transform] duration-100 motion-reduce:transition-none"
+                    aria-hidden="true"
+                    focusable="false"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                >
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </summary>
+            <nav aria-label="Primary" class="absolute z-10 inset-x-0 top-full bg-background">
+                <ul class="flex flex-col gap-1 px-4 pb-4">
+                    {links.map((link) => (
+                        <li><a href={link.href} class="block py-2 text-foreground-secondary hover:text-foreground">{link.label}</a></li>
+                    ))}
+                    <li><Button href="/paths" size="sm" class="mt-1">To set sail</Button></li>
+                </ul>
+                <div class="border-t border-border px-4 py-3">
+                    <ThemeToggle />
+                </div>
+            </nav>
+        </details>
     </div>
-    <nav id="mobile-menu" aria-label="Primary" class="md:hidden" hidden>
-        <ul class="flex flex-col gap-1 px-4 pb-4">
-            <li><a href="/paths" class="block py-2 text-foreground-secondary hover:text-foreground">All Paths</a></li>
-            <li><a href="/about" class="block py-2 text-foreground-secondary hover:text-foreground">About</a></li>
-            <li><a href="/support" class="block py-2 text-foreground-secondary hover:text-foreground">Support us</a></li>
-            <li><a href="/sign-in" class="block py-2 text-foreground-secondary hover:text-foreground">Sign in</a></li>
-            <li><Button href="/paths" size="sm" class="mt-1">To set sail</Button></li>
-        </ul>
-        <div class="border-t border-border px-4 py-3">
-            <ThemeToggle />
-        </div>
-    </nav>
 </header>
 
-<script>
-    const button = document.getElementById("mobile-menu-button");
-    const menu = document.getElementById("mobile-menu");
+<style>
+    details[open] > summary .icon-menu {
+        opacity: 0;
+        transform: scale(0.75);
+    }
 
-    button?.addEventListener("click", () => {
-        const isOpen = button?.getAttribute("aria-expanded") === "true";
-        button?.setAttribute("aria-expanded", String(!isOpen));
-        menu?.toggleAttribute("hidden", isOpen);
-    });
-</script>
+    details[open] > summary .icon-close {
+        opacity: 1;
+        transform: scale(1);
+    }
+</style>
