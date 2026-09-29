@@ -2,10 +2,24 @@
 import Button from "@/components/Button.astro";
 ---
 
+<section class="relative min-h-[calc(100dvh-4rem)] overflow-hidden text-center">
+    <img
+        src="/assets/corsarium-bg-light.svg"
+        alt=""
+        aria-hidden="true"
+        class="hero-bg-light absolute inset-0 h-full w-full object-cover"
+    />
+    <img
+        src="/assets/corsarium-bg-dark.svg"
+        alt=""
+        aria-hidden="true"
+        class="hero-bg-dark absolute inset-0 h-full w-full object-cover"
+    />
+    <div class="hero-overlay-light absolute inset-0 bg-background/40"></div>
+    <div class="hero-overlay-dark absolute inset-0 bg-background/70"></div>
+    <div class="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-background sm:h-40 lg:h-48"></div>
 
-
-<section class="text-center">
-    <div class="mx-auto max-w-4xl px-4 py-20 sm:py-28 lg:py-32">
+    <div class="relative z-10 mx-auto max-w-4xl px-4 py-20 sm:py-28 lg:py-32">
         <h1
             class="font-display text-5xl font-semibold leading-tight tracking-tight text-foreground sm:text-6xl lg:text-7xl"
         >
@@ -22,3 +36,29 @@ import Button from "@/components/Button.astro";
         <Button href="/voyages" class="mt-9">Begin your journey</Button>
     </div>
 </section>
+
+<style>
+    .hero-bg-dark {
+        display: none;
+    }
+
+    .hero-overlay-dark {
+        display: none;
+    }
+
+    :root[data-theme="dark"] .hero-bg-light {
+        display: none;
+    }
+
+    :root[data-theme="dark"] .hero-bg-dark {
+        display: block;
+    }
+
+    :root[data-theme="dark"] .hero-overlay-light {
+        display: none;
+    }
+
+    :root[data-theme="dark"] .hero-overlay-dark {
+        display: block;
+    }
+</style>
