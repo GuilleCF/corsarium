@@ -11,7 +11,7 @@ export async function getStaticPaths() {
     const lessons = await getCollection("lessons");
 
     return lessons.map((lesson) => ({
-        params: { path: lesson.data.path, lesson: lesson.id },
+        params: { voyage: lesson.data.voyage, lesson: lesson.id },
         props: { lesson },
     }));
 }

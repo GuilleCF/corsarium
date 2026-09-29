@@ -6,7 +6,7 @@ const lessons = defineCollection({
     schema: z.object({
         title: z.string(),
         description: z.string(),
-        path: z.string(),
+        voyage: z.string(),
         order: z.number(),
     }),
 });

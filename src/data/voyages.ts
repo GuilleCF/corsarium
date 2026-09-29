@@ -1,12 +1,11 @@
-export interface PathMeta {
+export interface VoyageMeta {
     title: string;
     description: string;
 }
 
-export const paths: Record<string, PathMeta> = {
+export const voyages: Record<string, VoyageMeta> = {
     test: {
-        title: "Test Path",
-        description: "Placeholder path used to verify the content routing end to end.",
+        title: "Test Voyage",
+        description: "Placeholder voyage used to verify the content routing end to end.",
     },
 };
-

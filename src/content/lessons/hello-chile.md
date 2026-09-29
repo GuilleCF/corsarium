@@ -1,7 +1,7 @@
 ---
 title: "Hello, world"
 description: "Placeholder entry to verify the lessons collection pipeline."
-path: "test"
+voyage: "test"
 order: 2
 ---
 
