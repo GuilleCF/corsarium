@@ -3,6 +3,8 @@ import "@/styles/global.css";
 import "@fontsource-variable/inter";
 import "@fontsource-variable/space-grotesk";
 import "@fontsource-variable/fira-code";
+import interLatinUrl from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
+import spaceGroteskLatinUrl from "@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url";
 import Navbar from "@/components/Navbar.astro";
 import Footer from "@/components/Footer.astro";
 
@@ -20,12 +22,14 @@ const { title, description } = Astro.props;
 <html lang="en">
     <head>
         <meta charset="utf-8" />
+        <link rel="preload" href={interLatinUrl} as="font" type="font/woff2" crossorigin />
+        <link rel="preload" href={spaceGroteskLatinUrl} as="font" ty>
         <script is:inline>
             let stored = null;
             try {
                 stored = localStorage.getItem("theme");
             } catch {
-                // Storage blocked: fall back to the OS preference below
+                // Storage blocked: fall back to the OS preference b
             }
 
             const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
