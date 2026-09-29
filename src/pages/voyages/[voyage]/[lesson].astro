@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import { parseLessonId } from "@/lib/lessons";
 
 interface Props {
     lesson: CollectionEntry<"lessons">;
@@ -10,10 +11,14 @@ interface Props {
 export async function getStaticPaths() {
     const lessons = await getCollection("lessons");
 
-    return lessons.map((lesson) => ({
-        params: { voyage: lesson.data.voyage, lesson: lesson.id },
-        props: { lesson },
-    }));
+    return lessons.map((entry) => {
+        const { voyage, lesson } = parseLessonId(entry.id);
+
+        return {
+            params: { voyage, lesson },
+            props: { lesson: entry },
+        };
+    });
 }
 
 const { lesson } = Astro.props;

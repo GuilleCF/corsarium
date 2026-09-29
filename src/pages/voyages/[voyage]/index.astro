@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import { voyages } from "@/data/voyages";
+import { parseLessonId } from "@/lib/lessons";
 
 export async function getStaticPaths() {
     return Object.keys(voyages).map((voyage) => ({ params: { voyage } }));
@@ -14,7 +15,7 @@ if (!meta) {
     throw new Error(`No voyage metadata found for "${voyage}"`);
 }
 
-const lessons = (await getCollection("lessons", (entry) => entry.data.voyage === voyage)).sort(
+const lessons = (await getCollection("lessons", (entry) => parseLessonId(entry.id).voyage === voyage)).sort(
     (a, b) => a.data.order - b.data.order,
 );
 ---
@@ -32,7 +33,7 @@ const lessons = (await getCollection("lessons", (entry) => entry.data.voyage ===
             {lessons.map((lesson) => (
                 <li>
                     <a
-                        href={`/voyages/${voyage}/${lesson.id}`}
+                        href={`/voyages/${voyage}/${parseLessonId(lesson.id).lesson}`}
                         class="text-foreground-secondary hover:text-foreground"
                     >
                         {lesson.data.order}. {lesson.data.title}
