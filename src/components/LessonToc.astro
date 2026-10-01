@@ -1,0 +1,28 @@
+---
+interface Heading {
+    depth: number;
+    slug: string;
+    text: string;
+}
+
+interface Props {
+    headings: Heading[];
+}
+
+const { headings } = Astro.props;
+---
+
+<aside class="hidden xl:block">
+    <nav aria-label="Lesson contents" class="sticky top-8 text-sm">
+        <h2 class="font-display text-sm font-semibold text-foreground">On this page</h2>
+        <ul class="mt-4 flex flex-col gap-2">
+            {headings.map((heading) => (
+                <li>
+                    <a href={`#${heading.slug}`} class="block text-foreground-secondary hover:text-foreground">
+                        {heading.text}
+                    </a>
+                </li>
+            ))}
+        </ul>
+    </nav>
+</aside>

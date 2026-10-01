@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import VoyageSidebar from "@/components/VoyageSidebar.astro";
+import LessonToc from "@/components/LessonToc.astro";
 import { parseLessonId } from "@/lib/lessons";
 
 interface Props {
@@ -24,7 +25,8 @@ export async function getStaticPaths() {
 
 const { lesson } = Astro.props;
 const { voyage } = Astro.params;
-const { Content } = await render(lesson);
+const { Content, headings } = await render(lesson);
+const hasToc = headings.length > 0;
 
 const voyageLessons = (await getCollection("lessons", (entry) => parseLessonId(entry.id).voyage === voyage)).sort(
     (a, b) => a.data.order - b.data.order,
@@ -36,7 +38,7 @@ const nextLesson = currentIndex < voyageLessons.length - 1 ? voyageLessons[curre
 ---
 
 <BaseLayout title={`Corsarium | ${lesson.data.title}`} description={lesson.data.description}>
-    <div class="grid items-start gap-8 px-4 py-16 sm:py-20 lg:grid-cols-[16rem_1fr]">
+    <div class={`grid items-start gap-8 px-4 py-16 sm:py-20 lg:grid-cols-[16rem_1fr] ${hasToc ? "xl:grid-cols-[16rem_1fr_16rem]" : ""}`}>
         <aside>
             <VoyageSidebar voyage={voyage} lessons={voyageLessons} currentLessonId={lesson.id} />
         </aside>
@@ -66,5 +68,6 @@ const nextLesson = currentIndex < voyageLessons.length - 1 ? voyageLessons[curre
                 ) : <span />}
             </nav>
         </article>
+        {hasToc && <LessonToc headings={headings} />}
     </div>
 </BaseLayout>
