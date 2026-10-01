@@ -1,10 +1,18 @@
 {
   "name": "corsarium",
+  "description": "An open educational platform for learning bioinformatics, with a focus on structural bioinformatics.",
   "type": "module",
   "version": "0.0.1",
+  "license": "MIT",
+  "author": "Guillermo",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/GuilleCF/corsarium"
+  },
   "engines": {
     "node": ">=22.12.0"
   },
+  "packageManager": "pnpm@12.6.0",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
