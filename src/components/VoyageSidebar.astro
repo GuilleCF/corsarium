@@ -1,21 +1,21 @@
 ---
 import type { CollectionEntry } from "astro:content";
-import { parseLessonId } from "@/lib/lessons";
+import { parseExpeditionId } from "@/lib/expeditions";
 
 interface Props {
     voyage: string;
-    lessons: CollectionEntry<"lessons">[];
-    currentLessonId: string;
+    expeditions: CollectionEntry<"expeditions">[];
+    currentExpeditionId: string;
 }
 
-const { voyage, lessons, currentLessonId } = Astro.props;
+const { voyage, expeditions, currentExpeditionId } = Astro.props;
 ---
 
 <details class="hidden lg:block" open>
     <summary
         class="grid h-9 w-9 list-none place-items-center rounded-full text-foreground hover:bg-surface-alt [&::-webkit-details-marker]:hidden"
     >
-        <span class="sr-only">Toggle lesson list</span>
+        <span class="sr-only">Toggle expedition list</span>
         <svg
             class="h-5 w-5"
             aria-hidden="true"
@@ -30,19 +30,18 @@ const { voyage, lessons, currentLessonId } = Astro.props;
             <path d="M9 3v18" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
     </summary>
-    <nav aria-label="Voyage lessons" class="mt-2 text-sm">
+    <nav aria-label="Voyage expeditions" class="mt-2 text-sm">
         <ol class="flex flex-col gap-1">
-            {lessons.map((entry) => {
-                const { lesson } = parseLessonId(entry.id);
-                const isActive = entry.id === currentLessonId;
+            {expeditions.map((entry) => {
+                const { expedition } = parseExpeditionId(entry.id);
+                const isActive = entry.id === currentExpeditionId;
 
                 return (
                     <li>
                         <a
-                            href={`/voyages/${voyage}/${lesson}`}
+                            href={`/voyages/${voyage}/${expedition}`}
                             aria-current={isActive ? "page" : undefined}
-                            class="block rounded-md px-3 py-2 text-foreground-secondary aria-[current=page]:bg-surface-alt aria-[current=page]:font-medium
-aria-[current=page]:text-foreground hover:text-foreground"
+                            class="block rounded-md px-3 py-2 text-foreground-secondary aria-[current=page]:bg-surface-alt aria-[current=page]:font-medium aria-[current=page]:text-foreground hover:text-foreground"
                         >
                             {entry.data.order}. {entry.data.title}
                         </a>
@@ -57,7 +56,7 @@ aria-[current=page]:text-foreground hover:text-foreground"
     <summary
         class="grid h-9 w-9 list-none place-items-center rounded-full text-foreground hover:bg-surface-alt [&::-webkit-details-marker]:hidden"
     >
-        <span class="sr-only">Toggle lesson list</span>
+        <span class="sr-only">Toggle expedition list</span>
         <svg
             class="h-5 w-5"
             aria-hidden="true"
@@ -72,19 +71,18 @@ aria-[current=page]:text-foreground hover:text-foreground"
             <path d="M9 3v18" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
     </summary>
-    <nav aria-label="Voyage lessons" class="mt-2 text-sm">
+    <nav aria-label="Voyage expeditions" class="mt-2 text-sm">
         <ol class="flex flex-col gap-1">
-            {lessons.map((entry) => {
-                const { lesson } = parseLessonId(entry.id);
-                const isActive = entry.id === currentLessonId;
+            {expeditions.map((entry) => {
+                const { expedition } = parseExpeditionId(entry.id);
+                const isActive = entry.id === currentExpeditionId;
 
                 return (
                     <li>
                         <a
-                            href={`/voyages/${voyage}/${lesson}`}
+                            href={`/voyages/${voyage}/${expedition}`}
                             aria-current={isActive ? "page" : undefined}
-                            class="block rounded-md px-3 py-2 text-foreground-secondary aria-[current=page]:bg-surface-alt aria-[current=page]:font-medium
-aria-[current=page]:text-foreground hover:text-foreground"
+                            class="block rounded-md px-3 py-2 text-foreground-secondary aria-[current=page]:bg-surface-alt aria-[current=page]:font-medium aria-[current=page]:text-foreground hover:text-foreground"
                         >
                             {entry.data.order}. {entry.data.title}
                         </a>

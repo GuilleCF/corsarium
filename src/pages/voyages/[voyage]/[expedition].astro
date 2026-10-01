@@ -1,0 +1,73 @@
+---
+import { getCollection, render } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import VoyageSidebar from "@/components/VoyageSidebar.astro";
+import ExpeditionToc from "@/components/ExpeditionToc.astro";
+import { parseExpeditionId } from "@/lib/expeditions";
+
+interface Props {
+    expedition: CollectionEntry<"expeditions">;
+}
+
+export async function getStaticPaths() {
+    const expeditions = await getCollection("expeditions");
+
+    return expeditions.map((entry) => {
+        const { voyage, expedition } = parseExpeditionId(entry.id);
+
+        return {
+            params: { voyage, expedition },
+            props: { expedition: entry },
+        };
+    });
+}
+
+const { expedition } = Astro.props;
+const { voyage } = Astro.params;
+const { Content, headings } = await render(expedition);
+const hasToc = headings.length > 0;
+
+const voyageExpeditions = (await getCollection("expeditions", (entry) => parseExpeditionId(entry.id).voyage === voyage)).sort(
+    (a, b) => a.data.order - b.data.order,
+);
+
+const currentIndex = voyageExpeditions.findIndex((entry) => entry.id === expedition.id);
+const previousExpedition = currentIndex > 0 ? voyageExpeditions[currentIndex - 1] : null;
+const nextExpedition = currentIndex < voyageExpeditions.length - 1 ? voyageExpeditions[currentIndex + 1] : null;
+---
+
+<BaseLayout title={`Corsarium | ${expedition.data.title}`} description={expedition.data.description}>
+    <div class={`grid items-start gap-8 px-4 py-16 sm:py-20 lg:grid-cols-[16rem_1fr] ${hasToc ? "xl:grid-cols-[16rem_1fr_16rem]" : ""}`}>
+        <aside>
+            <VoyageSidebar voyage={voyage} expeditions={voyageExpeditions} currentExpeditionId={expedition.id} />
+        </aside>
+        <article class="max-w-3xl">
+            <h1 class="font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+                {expedition.data.title}
+            </h1>
+            <div class="mt-8 text-foreground">
+                <Content />
+            </div>
+            <nav aria-label="Expedition navigation" class="mt-12 flex items-center justify-between border-t border-border pt-6 text-sm">
+                {previousExpedition ? (
+                    <a
+                        href={`/voyages/${voyage}/${parseExpeditionId(previousExpedition.id).expedition}`}
+                        class="text-foreground-secondary hover:text-foreground"
+                    >
+                        ← {previousExpedition.data.title}
+                    </a>
+                ) : <span />}
+                {nextExpedition ? (
+                    <a
+                        href={`/voyages/${voyage}/${parseExpeditionId(nextExpedition.id).expedition}`}
+                        class="text-foreground-secondary hover:text-foreground"
+                    >
+                        {nextExpedition.data.title} →
+                    </a>
+                ) : <span />}
+            </nav>
+        </article>
+        {hasToc && <ExpeditionToc headings={headings} />}
+    </div>
+</BaseLayout>
