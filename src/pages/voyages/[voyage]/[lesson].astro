@@ -29,10 +29,14 @@ const { Content } = await render(lesson);
 const voyageLessons = (await getCollection("lessons", (entry) => parseLessonId(entry.id).voyage === voyage)).sort(
     (a, b) => a.data.order - b.data.order,
 );
+
+const currentIndex = voyageLessons.findIndex((entry) => entry.id === lesson.id);
+const previousLesson = currentIndex > 0 ? voyageLessons[currentIndex - 1] : null;
+const nextLesson = currentIndex < voyageLessons.length - 1 ? voyageLessons[currentIndex + 1] : null;
 ---
 
 <BaseLayout title={`Corsarium | ${lesson.data.title}`} description={lesson.data.description}>
-    <div class="mx-auto grid max-w-6xl gap-8 px-4 py-16 sm:py-20 lg:grid-cols-[16rem_1fr]">
+    <div class="grid items-start gap-8 px-4 py-16 sm:py-20 lg:grid-cols-[16rem_1fr]">
         <aside>
             <VoyageSidebar voyage={voyage} lessons={voyageLessons} currentLessonId={lesson.id} />
         </aside>
@@ -43,6 +47,24 @@ const voyageLessons = (await getCollection("lessons", (entry) => parseLessonId(e
             <div class="mt-8 text-foreground">
                 <Content />
             </div>
+            <nav aria-label="Lesson navigation" class="mt-12 flex items-center justify-between border-t border-border pt-6 text-sm">
+                {previousLesson ? (
+                    <a
+                        href={`/voyages/${voyage}/${parseLessonId(previousLesson.id).lesson}`}
+                        class="text-foreground-secondary hover:text-foreground"
+                    >
+                        ← {previousLesson.data.title}
+                    </a>
+                ) : <span />}
+                {nextLesson ? (
+                    <a
+                        href={`/voyages/${voyage}/${parseLessonId(nextLesson.id).lesson}`}
+                        class="text-foreground-secondary hover:text-foreground"
+                    >
+                        {nextLesson.data.title} →
+                    </a>
+                ) : <span />}
+            </nav>
         </article>
     </div>
 </BaseLayout>

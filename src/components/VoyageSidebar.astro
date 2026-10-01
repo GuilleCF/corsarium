@@ -11,49 +11,26 @@ interface Props {
 const { voyage, lessons, currentLessonId } = Astro.props;
 ---
 
-<nav aria-label="Voyage lessons" class="hidden text-sm lg:block">
-    <ol class="flex flex-col gap-1">
-        {lessons.map((entry) => {
-            const { lesson } = parseLessonId(entry.id);
-            const isActive = entry.id === currentLessonId;
-
-            return (
-                <li>
-                    <a
-                        href={`/voyages/${voyage}/${lesson}`}
-                        aria-current={isActive ? "page" : undefined}
-                        class="block rounded-md px-3 py-2 text-foreground-secondary aria-[current=page]:bg-surface-alt aria-[current=page]:font-medium
-aria-[current=page]:text-foreground hover:text-foreground"
-                    >
-                        {entry.data.order}. {entry.data.title}
-                    </a>
-                </li>
-            );
-        })}
-    </ol>
-</nav>
-
-<details class="text-sm lg:hidden">
+<details class="hidden lg:block" open>
     <summary
-        class="flex list-none items-center justify-between gap-2 rou text-foreground hover:bg-surface-alt[&::-webkit-details-marker]:hidden"
+        class="grid h-9 w-9 list-none place-items-center rounded-full text-foreground hover:bg-surface-alt [&::-webkit-details-marker]:hidden"
     >
-        Lessons in this voyage
+        <span class="sr-only">Toggle lesson list</span>
         <svg
-            class="icon-chevron h-4 w-4 transition-transform duration-100 motion-reduce:transition-none"
+            class="h-5 w-5"
             aria-hidden="true"
             focusable="false"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            stroke-width="1.5"
         >
-            <polyline points="9 6 15 12 9 18"></polyline>
+            <rect x="3" y="3" width="18" height="18" rx="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+            <path d="M9 3v18" stroke-linecap="round" stroke-linejoin="round"></path>
         </svg>
     </summary>
-    <nav aria-label="Voyage lessons" class="mt-1">
+    <nav aria-label="Voyage lessons" class="mt-2 text-sm">
         <ol class="flex flex-col gap-1">
             {lessons.map((entry) => {
                 const { lesson } = parseLessonId(entry.id);
@@ -64,7 +41,8 @@ aria-[current=page]:text-foreground hover:text-foreground"
                         <a
                             href={`/voyages/${voyage}/${lesson}`}
                             aria-current={isActive ? "page" : undefined}
-                            class="block rounded-md px-3 py-2 text-frent=page]:bg-surface-alt aria-[current=page]:font-mediumaria-[current=page]:text-foreground hover:text-foreground"
+                            class="block rounded-md px-3 py-2 text-foreground-secondary aria-[current=page]:bg-surface-alt aria-[current=page]:font-medium
+aria-[current=page]:text-foreground hover:text-foreground"
                         >
                             {entry.data.order}. {entry.data.title}
                         </a>
@@ -75,8 +53,44 @@ aria-[current=page]:text-foreground hover:text-foreground"
     </nav>
 </details>
 
-<style>
-    details[open] > summary .icon-chevron {
-        transform: rotate(90deg);
-    }
-</style>
+<details class="lg:hidden">
+    <summary
+        class="grid h-9 w-9 list-none place-items-center rounded-full text-foreground hover:bg-surface-alt [&::-webkit-details-marker]:hidden"
+    >
+        <span class="sr-only">Toggle lesson list</span>
+        <svg
+            class="h-5 w-5"
+            aria-hidden="true"
+            focusable="false"
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+        >
+            <rect x="3" y="3" width="18" height="18" rx="2" stroke-linecap="round" stroke-linejoin="round"></rect>
+            <path d="M9 3v18" stroke-linecap="round" stroke-linejoin="round"></path>
+        </svg>
+    </summary>
+    <nav aria-label="Voyage lessons" class="mt-2 text-sm">
+        <ol class="flex flex-col gap-1">
+            {lessons.map((entry) => {
+                const { lesson } = parseLessonId(entry.id);
+                const isActive = entry.id === currentLessonId;
+
+                return (
+                    <li>
+                        <a
+                            href={`/voyages/${voyage}/${lesson}`}
+                            aria-current={isActive ? "page" : undefined}
+                            class="block rounded-md px-3 py-2 text-foreground-secondary aria-[current=page]:bg-surface-alt aria-[current=page]:font-medium
+aria-[current=page]:text-foreground hover:text-foreground"
+                        >
+                            {entry.data.order}. {entry.data.title}
+                        </a>
+                    </li>
+                );
+            })}
+        </ol>
+    </nav>
+</details>
