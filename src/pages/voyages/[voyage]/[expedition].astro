@@ -38,7 +38,7 @@ const nextExpedition = currentIndex < voyageExpeditions.length - 1 ? voyageExped
 ---
 
 <BaseLayout title={`Corsarium | ${expedition.data.title}`} description={expedition.data.description}>
-    <div class={`grid items-start gap-8 px-4 py-16 sm:py-20 lg:grid-cols-[16rem_1fr] ${hasToc ? "xl:grid-cols-[16rem_1fr_16rem]" : ""}`}>
+    <div class={`grid items-start gap-10 px-4 py-16 sm:py-20 lg:grid-cols-[20rem_1fr] ${hasToc ? "xl:grid-cols-[20rem_1fr_18rem]" : ""}`}>
         <aside>
             <VoyageSidebar voyage={voyage} expeditions={voyageExpeditions} currentExpeditionId={expedition.id} />
         </aside>
