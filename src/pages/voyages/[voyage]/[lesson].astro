@@ -2,6 +2,7 @@
 import { getCollection, render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import VoyageSidebar from "@/components/VoyageSidebar.astro";
 import { parseLessonId } from "@/lib/lessons";
 
 interface Props {
@@ -22,16 +23,26 @@ export async function getStaticPaths() {
 }
 
 const { lesson } = Astro.props;
+const { voyage } = Astro.params;
 const { Content } = await render(lesson);
+
+const voyageLessons = (await getCollection("lessons", (entry) => parseLessonId(entry.id).voyage === voyage)).sort(
+    (a, b) => a.data.order - b.data.order,
+);
 ---
 
 <BaseLayout title={`Corsarium | ${lesson.data.title}`} description={lesson.data.description}>
-    <article class="mx-auto max-w-3xl px-4 py-16 sm:py-20">
-        <h1 class="font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-            {lesson.data.title}
-        </h1>
-        <div class="mt-8 text-foreground">
-            <Content />
-        </div>
-    </article>
+    <div class="mx-auto grid max-w-6xl gap-8 px-4 py-16 sm:py-20 lg:grid-cols-[16rem_1fr]">
+        <aside>
+            <VoyageSidebar voyage={voyage} lessons={voyageLessons} currentLessonId={lesson.id} />
+        </aside>
+        <article class="max-w-3xl">
+            <h1 class="font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+                {lesson.data.title}
+            </h1>
+            <div class="mt-8 text-foreground">
+                <Content />
+            </div>
+        </article>
+    </div>
 </BaseLayout>
