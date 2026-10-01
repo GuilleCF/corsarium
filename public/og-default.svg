@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+    <rect width="1200" height="630" fill="#0A1112" />
+    <circle cx="245" cy="315" r="150" fill="none" stroke="#57D6C4" stroke-width="10" />
+    <path d="M245 195 L305 315 L245 435 L185 315 Z" fill="#D0A957" />
+    <text x="460" y="340" font-family="Space Grotesk, system-ui, sans-serif" font-size="88" font-weight="600" fill="#E8F0EF">Corsarium</text>
+    <text x="462" y="390" font-family="Inter, system-ui, sans-serif" font-size="30" fill="#9AAEAD">Learn structural bioinformatics</text>
+</svg>
