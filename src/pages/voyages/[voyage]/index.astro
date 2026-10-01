@@ -22,24 +22,42 @@ const expeditions = (await getCollection("expeditions", (entry) => parseExpediti
 
 <BaseLayout title={`Corsarium | ${meta.title}`} description={meta.description}>
     <section class="px-4 py-16 sm:py-20">
-        <h1 class="font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
-            {meta.title}
-        </h1>
-        <p class="mt-4 max-w-2xl text-lg text-foreground-muted">
-            {meta.description}
-        </p>
+        <div class="mx-auto max-w-3xl">
+            <h1 class="font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+                {meta.title}
+            </h1>
+            <h2 class="mt-6 text-sm font-semibold uppercase tracking-wide text-foreground-muted">Overview</h2>
+            <p class="mt-1 text-lg text-foreground-muted">
+                {meta.description}
+            </p>
 
-        <ol class="mt-10 flex flex-col gap-2">
-            {expeditions.map((expedition) => (
-                <li>
-                    <a
-                        href={`/voyages/${voyage}/${parseExpeditionId(expedition.id).expedition}`}
-                        class="text-foreground-secondary hover:text-foreground"
-                    >
-                        {expedition.data.order}. {expedition.data.title}
-                    </a>
-                </li>
-            ))}
-        </ol>
+            <ol class="mt-8 flex flex-col gap-1 rounded-xl bg-surface p-2">
+                {expeditions.map((expedition) => (
+                    <li>
+                        <a
+                            href={`/voyages/${voyage}/${parseExpeditionId(expedition.id).expedition}`}
+                            class="flex items-center gap-3 rounded-md px-3 py-2 text-foreground-secondary hover:bg-surface-alt hover:text-foreground"
+                        >
+                            <svg
+                                class="h-4 w-4 shrink-0"
+                                aria-hidden="true"
+                                focusable="false"
+                                xmlns="http://www.w3.org/2000/svg"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                stroke-width="1.5"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            >
+                                <circle cx="12" cy="12" r="9"></circle>
+                                <polygon points="14.5 9.5 10.5 10.5 9.5 14.5 13.5 13.5"></polygon>
+                            </svg>
+                            <span>{expedition.data.order}. {expedition.data.title}</span>
+                        </a>
+                    </li>
+                ))}
+            </ol>
+        </div>
     </section>
 </BaseLayout>
