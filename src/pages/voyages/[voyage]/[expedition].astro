@@ -4,7 +4,9 @@ import type { CollectionEntry } from "astro:content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import VoyageSidebar from "@/components/VoyageSidebar.astro";
 import ExpeditionToc from "@/components/ExpeditionToc.astro";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import { parseExpeditionId } from "@/lib/expeditions";
+import { voyages } from "@/data/voyages";
 
 interface Props {
     expedition: CollectionEntry<"expeditions">;
@@ -28,6 +30,11 @@ const { voyage } = Astro.params;
 const { Content, headings } = await render(expedition);
 const hasToc = headings.length > 0;
 
+const voyageMeta = voyages[voyage];
+if (!voyageMeta) {
+    throw new Error(`No voyage metadata found for "${voyage}"`);
+}
+
 const voyageExpeditions = (await getCollection("expeditions", (entry) => parseExpeditionId(entry.id).voyage === voyage)).sort(
     (a, b) => a.data.order - b.data.order,
 );
@@ -40,10 +47,11 @@ const nextExpedition = currentIndex < voyageExpeditions.length - 1 ? voyageExped
 <BaseLayout title={`Corsarium | ${expedition.data.title}`} description={expedition.data.description}>
     <div class={`grid items-start gap-10 px-4 py-16 sm:py-20 lg:grid-cols-[20rem_1fr] ${hasToc ? "xl:grid-cols-[20rem_1fr_18rem]" : ""}`}>
         <aside>
-            <VoyageSidebar voyage={voyage} expeditions={voyageExpeditions} currentExpeditionId={expedition.id} />
+            <VoyageSidebar voyage={voyage} expeditions={voyageExpeditions} currentExpeditionId={expedition.id}/>
         </aside>
         <article class="max-w-3xl">
-            <h1 class="font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+            <Breadcrumbs voyage={voyage} voyageTitle={voyageMeta.title} expeditionTitle={expedition.data.title} />
+            <h1 class="mt-4 font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
                 {expedition.data.title}
             </h1>
             <div class="prose dark:prose-invert prose-headings:text-foreground mt-8 text-foreground">
