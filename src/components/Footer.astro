@@ -3,28 +3,29 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="bg-surface-alt">
-    <div class="flex flex-col gap-6 px-4 py-10 md:flex-row md:items-start md:justify-between">
-        <div class="max-w-sm">
-            <a href="/" class="text-lg font-semibold text-foreground">Corsarium</a>
-            <p class="mt-2 text-sm text-foreground-muted">
-                An open educational platform for learning bioinformatics, with a focus on structural bioinformatics.
+    <div class="mx-auto max-w-7xl px-4 py-12 sm:py-16">
+        <div class="xl:grid xl:grid-cols-3 xl:gap-8">
+            <div class="max-w-sm">
+                <a href="/" class="text-lg font-semibold text-foreground">Corsarium</a>
+                <p class="mt-2 text-sm text-foreground-muted">
+                    An open educational platform for learning bioinformatics, with a focus on structural bioinformatics.
+                </p>
+            </div>
+            <nav aria-label="Footer" class="mt-10 xl:col-span-2 xl:mt-0">
+                <h2 class="text-sm font-semibold text-foreground">Explore</h2>
+                <ul class="mt-4 flex flex-col gap-2 text-sm">
+                    <li><a href="/voyages" class="text-foreground-secondary hover:text-foreground">All Voyages</a></li>
+                    <li><a href="/about" class="text-foreground-secondary hover:text-foreground">About</a></li>
+                    <li><a href="/support" class="text-foreground-secondary hover:text-foreground">Support us</a></li>
+                    <li><a href="https://github.com/GuilleCF/corsarium" class="text-foreground-secondary hover:text-foreground">Source code</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="mt-12 border-t border-border pt-8">
+            <p class="text-sm text-foreground-muted">
+                &copy; {year} Guillermo. Code released under the
+                <a href="https://github.com/GuilleCF/corsarium/blob/main/LICENSE" class="underline hover:text-foreground">MIT License</a>.
             </p>
         </div>
-
-        <nav aria-label="Footer">
-            <ul class="flex flex-wrap gap-x-6 gap-y-2 text-sm">
-                <li><a href="/voyages" class="text-foreground-secondary hover:text-foreground">All Voyages</a></li>
-                <li><a href="/about" class="text-foreground-secondary hover:text-foreground">About</a></li>
-                <li><a href="/support" class="text-foreground-secondary hover:text-foreground">Support us</a></li>
-                <li><a href="https://github.com/GuilleCF/corsarium" class="text-foreground-secondary hover:text-foreground">Source code</a></li>
-            </ul>
-        </nav>
-    </div>
-
-    <div class="px-4 pb-10">
-        <p class="text-sm text-foreground-muted">
-            &copy; {year} Guillermo. Code released under the
-            <a href="https://github.com/GuilleCF/corsarium/blob/main/LICENSE" class="underline hover:text-foreground">MIT License</a>.
-        </p>
     </div>
 </footer>
