@@ -37,7 +37,7 @@ const expeditions = (await getCollection("expeditions", (entry) => parseExpediti
                 {meta.description}
             </p>
 
-            <ol class="mt-8 flex flex-col gap-1 rounded-xl bg-surface p-2">
+            <ol class="mt-8 flex flex-col gap-1 rounded-xl border border-border-strong bg-surface p-2">
                 {expeditions.map((expedition) => (
                     <li>
                         <a

@@ -16,7 +16,7 @@ const voyages = (await getCollection("voyages")).sort((a, b) => a.data.order - b
 
         <ul class="mt-10 grid gap-6 sm:grid-cols-2">
             {voyages.map((voyage) => (
-                <li class="rounded-xl bg-surface p-8">
+                <li class="rounded-xl border border-border-strong bg-surface p-8">
                     <h2 class="font-display text-xl font-semibold text-foreground">
                         <a href={`/voyages/${voyage.id}`} class="hover:text-accent">{voyage.data.title}</a>
                     </h2>

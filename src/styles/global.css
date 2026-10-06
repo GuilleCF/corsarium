@@ -21,6 +21,7 @@
     --color-surface: #FFFFFF;
     --color-surface-alt: #EAF4F2;
     --color-border: #D3E0DE;
+    --color-border-strong: #738F8B;
     --color-foreground: #0A1112;
     --color-foreground-secondary: #284344;
     --color-foreground-muted: #586D6C;
@@ -58,6 +59,7 @@ body:has([data-hero]) > header {
     --color-surface: var(--color-deep-water);
     --color-surface-alt: var(--color-ocean);
     --color-border: var(--color-tide);
+    --color-border-strong: #5A7C7D;
     --color-foreground: var(--color-mist);
     --color-foreground-secondary: var(--color-foam);
     --color-foreground-muted: var(--color-drift);
