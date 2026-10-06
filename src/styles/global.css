@@ -43,6 +43,15 @@
     }
 }
 
+/* The home page hero starts at the top, so the navbar floats over it with a transparent background */
+body:has([data-hero]) > header {
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    z-index: 50;
+    background-color: transparent;
+}
+
 :root[data-theme="dark"] {
     color-scheme: dark;
     --color-background: var(--color-abyss);
