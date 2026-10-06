@@ -1,19 +1,21 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import { voyages } from "@/data/voyages";
+import Sidebar from "@/components/Sidebar.astro";
 import { parseExpeditionId } from "@/lib/expeditions";
 
 export async function getStaticPaths() {
-    return Object.keys(voyages).map((voyage) => ({ params: { voyage } }));
+    const voyages = await getCollection("voyages");
+
+    return voyages.map((entry) => ({
+        params: { voyage: entry.id },
+        props: { voyage: entry },
+    }));
 }
 
 const { voyage } = Astro.params;
-const meta = voyages[voyage];
-
-if (!meta) {
-    throw new Error(`No voyage metadata found for "${voyage}"`);
-}
+const { voyage: entry } = Astro.props;
+const meta = entry.data;
 
 const expeditions = (await getCollection("expeditions", (entry) => parseExpeditionId(entry.id).voyage === voyage)).sort(
     (a, b) => a.data.order - b.data.order,
@@ -21,8 +23,12 @@ const expeditions = (await getCollection("expeditions", (entry) => parseExpediti
 ---
 
 <BaseLayout title={`Corsarium | ${meta.title}`} description={meta.description}>
-    <section class="px-4 py-16 sm:py-20">
-        <div class="mx-auto max-w-3xl">
+    <div class="grid lg:grid-cols-[20rem_1fr]">
+        <aside>
+            <Sidebar currentVoyage={voyage} />
+        </aside>
+        <div class="min-w-0">
+            <div class="mx-auto w-full max-w-3xl px-4 pb-16 pt-8 sm:pb-20">
             <h1 class="font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
                 {meta.title}
             </h1>
@@ -58,6 +64,7 @@ const expeditions = (await getCollection("expeditions", (entry) => parseExpediti
                     </li>
                 ))}
             </ol>
+            </div>
         </div>
-    </section>
+    </div>
 </BaseLayout>

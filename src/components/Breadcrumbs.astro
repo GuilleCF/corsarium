@@ -12,7 +12,7 @@ const { voyage, voyageTitle, expeditionTitle } = Astro.props;
     <ol class="flex flex-wrap items-center gap-x-2 text-foreground-secondary">
         <li><a href="/" class="hover:text-foreground">Home</a></li>
         <li class="before:mr-2 before:content-['/']">
-            <a href="/voyages" class="hover:text-foreground">Voyages</a>
+            <a href="/voyages" class="hover:text-foreground">All Voyages</a>
         </li>
         <li class="before:mr-2 before:content-['/']">
             <a href={`/voyages/${voyage}`} class="hover:text-foreground">{voyageTitle}</a>

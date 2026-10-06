@@ -27,17 +27,20 @@
     --color-accent: #0E7C70;
     --color-accent-hover: #0A5F56;
     --color-accent-secondary: #8C6A1F;
-    --color-accent-secondary-hover: #705519;
-    --color-highlight: #D4F5EF;
-    --color-highlight-warm: #F3E8C8;
 
     --font-sans: "Inter Variable", system-ui, sans-serif;
     --font-display: "Space Grotesk Variable", system-ui, sans-serif;
-    --font-mono: "Fira Code Variable", ui-monospace, monospace;
 }
 
 :root {
     color-scheme: light;
+}
+
+/* Voyage pages have a sidebar, so the navbar gets the same divider on desktop */
+@media (min-width: 64rem) {
+    body:has([data-sidebar]) > header {
+        border-bottom: 1px solid var(--color-border);
+    }
 }
 
 :root[data-theme="dark"] {
@@ -52,7 +55,4 @@
     --color-accent: var(--color-glow);
     --color-accent-hover: #7EE4D6;
     --color-accent-secondary: var(--color-brass);
-    --color-accent-secondary-hover: #D7B670;
-    --color-highlight: var(--color-foam);
-    --color-highlight-warm: var(--color-sand);
 }

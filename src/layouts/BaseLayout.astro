@@ -2,7 +2,6 @@
 import "@/styles/global.css";
 import "@fontsource-variable/inter";
 import "@fontsource-variable/space-grotesk";
-import "@fontsource-variable/fira-code";
 import interLatinUrl from "@fontsource-variable/inter/files/inter-latin-wght-normal.woff2?url";
 import spaceGroteskLatinUrl from "@fontsource-variable/space-grotesk/files/space-grotesk-latin-wght-normal.woff2?url";
 import Navbar from "@/components/Navbar.astro";
@@ -11,12 +10,11 @@ import Footer from "@/components/Footer.astro";
 interface Props {
     title: string;
     description: string;
-    image?: string;
 }
 
-const { title, description, image = "/og-default.png" } = Astro.props;
+const { title, description } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
-const ogImageURL = new URL(image, Astro.site);
+const ogImageURL = new URL("/og-default.png", Astro.site);
 ---
 
 
@@ -32,7 +30,7 @@ const ogImageURL = new URL(image, Astro.site);
             try {
                 stored = localStorage.getItem("theme");
             } catch {
-                // Storage blocked: fall back to the OS preference b
+                // Storage blocked: fall back to the OS preference
             }
 
             const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
@@ -55,6 +53,8 @@ const ogImageURL = new URL(image, Astro.site);
         <meta property="og:title" content={title} />
         <meta property="og:description" content={description} />
         <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Corsarium" />
+        <meta property="og:locale" content="en_US" />
         <meta property="og:url" content={canonicalURL} />
         <meta property="og:image" content={ogImageURL} />
         <meta name="twitter:card" content="summary_large_image" />

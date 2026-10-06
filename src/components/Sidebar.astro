@@ -1,0 +1,83 @@
+---
+import { getCollection } from "astro:content";
+import { parseExpeditionId } from "@/lib/expeditions";
+import SidebarToggle from "@/components/SidebarToggle.astro";
+
+interface Props {
+    currentVoyage?: string;
+    currentExpeditionId?: string;
+}
+
+const { currentVoyage, currentExpeditionId } = Astro.props;
+
+// Built from the content folders, so new voyages and expeditions appear without editing this file
+const voyages = (await getCollection("voyages")).sort((a, b) => a.data.order - b.data.order);
+const expeditions = await getCollection("expeditions");
+
+const groups = voyages.map((voyage) => ({
+    voyage,
+    items: expeditions
+        .filter((entry) => parseExpeditionId(entry.id).voyage === voyage.id)
+        .sort((a, b) => a.data.order - b.data.order),
+}));
+---
+
+<div data-sidebar class="group relative pt-12 lg:h-full lg:w-80 lg:pt-0 lg:data-[open=true]:border-r lg:data-[open=true]:border-border">
+    <div class="absolute left-6 top-4 lg:group-data-[open=true]:left-[calc(20rem+1.5rem)]">
+        <SidebarToggle />
+    </div>
+
+    <div id="sidebar-panel" data-sidebar-panel class="px-4 py-6">
+        <nav aria-label="Voyages" class="text-sm">
+            {groups.map(({ voyage, items }) => (
+                <details open={voyage.id === currentVoyage} class="mb-2">
+                    <summary class="cursor-pointer list-none rounded-md px-3 py-2 font-medium text-foreground-secondary hover:bg-surface-alt hover:text-foreground [&::-webkit-details-marker]:hidden">
+                        {voyage.data.title}
+                    </summary>
+                    <ol class="mt-1 flex flex-col gap-1 pl-3">
+                        {items.map((entry) => {
+                            const { expedition } = parseExpeditionId(entry.id);
+                            const isActive = entry.id === currentExpeditionId;
+
+                            return (
+                                <li>
+                                    <a
+                                        href={`/voyages/${voyage.id}/${expedition}`}
+                                        aria-current={isActive ? "page" : undefined}
+                                        class="block rounded-md px-3 py-2 text-foreground-secondary aria-[current=page]:bg-surface-alt aria-[current=page]:font-medium aria-[current=page]:text-foreground hover:text-foreground"
+                                    >
+                                        {entry.data.order}. {entry.data.title}
+                                    </a>
+                                </li>
+                            );
+                        })}
+                    </ol>
+                </details>
+            ))}
+        </nav>
+    </div>
+</div>
+
+<script>
+    // Open by default on desktop, closed on mobile so the article stays near the top.
+    // Re-applies that default when the window crosses the breakpoint.
+    const root = document.querySelector<HTMLElement>("[data-sidebar]");
+    const button = document.querySelector<HTMLButtonElement>("[data-sidebar-toggle]");
+    const panel = root?.querySelector<HTMLElement>("[data-sidebar-panel]");
+    const desktop = window.matchMedia("(min-width: 64rem)");
+
+    function setOpen(open: boolean) {
+        if (!root || !button || !panel) return;
+
+        root.dataset.open = String(open);
+        panel.hidden = !open;
+        button.setAttribute("aria-expanded", String(open));
+        button.setAttribute("aria-label", open ? "Hide sidebar" : "Show sidebar");
+    }
+
+    setOpen(desktop.matches);
+    button?.addEventListener("click", () => {
+        setOpen(root?.dataset.open !== "true");
+    });
+    desktop.addEventListener("change", (event) => setOpen(event.matches));
+</script>

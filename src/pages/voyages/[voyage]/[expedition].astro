@@ -1,12 +1,11 @@
 ---
-import { getCollection, render } from "astro:content";
+import { getCollection, getEntry, render } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
-import VoyageSidebar from "@/components/VoyageSidebar.astro";
+import Sidebar from "@/components/Sidebar.astro";
 import ExpeditionToc from "@/components/ExpeditionToc.astro";
 import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import { parseExpeditionId } from "@/lib/expeditions";
-import { voyages } from "@/data/voyages";
 
 interface Props {
     expedition: CollectionEntry<"expeditions">;
@@ -30,8 +29,8 @@ const { voyage } = Astro.params;
 const { Content, headings } = await render(expedition);
 const hasToc = headings.length > 0;
 
-const voyageMeta = voyages[voyage];
-if (!voyageMeta) {
+const voyageEntry = await getEntry("voyages", voyage);
+if (!voyageEntry) {
     throw new Error(`No voyage metadata found for "${voyage}"`);
 }
 
@@ -45,12 +44,13 @@ const nextExpedition = currentIndex < voyageExpeditions.length - 1 ? voyageExped
 ---
 
 <BaseLayout title={`Corsarium | ${expedition.data.title}`} description={expedition.data.description}>
-    <div class={`grid items-start gap-10 px-4 py-16 sm:py-20 lg:grid-cols-[20rem_1fr] ${hasToc ? "xl:grid-cols-[20rem_1fr_18rem]" : ""}`}>
+    <div class={`grid lg:grid-cols-[20rem_1fr] ${hasToc ? "xl:grid-cols-[20rem_1fr_18rem]" : ""}`}>
         <aside>
-            <VoyageSidebar voyage={voyage} expeditions={voyageExpeditions} currentExpeditionId={expedition.id}/>
+            <Sidebar currentVoyage={voyage} currentExpeditionId={expedition.id} />
         </aside>
-        <article class="max-w-3xl">
-            <Breadcrumbs voyage={voyage} voyageTitle={voyageMeta.title} expeditionTitle={expedition.data.title} />
+        <div class="min-w-0">
+            <article class="mx-auto w-full max-w-3xl px-4 pb-16 pt-8 sm:pb-20">
+            <Breadcrumbs voyage={voyage} voyageTitle={voyageEntry.data.title} expeditionTitle={expedition.data.title} />
             <h1 class="mt-4 font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
                 {expedition.data.title}
             </h1>
@@ -75,7 +75,8 @@ const nextExpedition = currentIndex < voyageExpeditions.length - 1 ? voyageExped
                     </a>
                 ) : <span />}
             </nav>
-        </article>
+            </article>
+        </div>
         {hasToc && <ExpeditionToc headings={headings} />}
     </div>
 </BaseLayout>
