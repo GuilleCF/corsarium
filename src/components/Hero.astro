@@ -2,7 +2,7 @@
 import Button from "@/components/Button.astro";
 ---
 
-<section data-hero class="relative min-h-dvh overflow-hidden text-center">
+<section data-hero class="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden text-center">
     <img
         src="/assets/corsarium-bg-light.svg"
         alt=""
@@ -19,7 +19,7 @@ import Button from "@/components/Button.astro";
     <div class="hero-overlay-dark absolute inset-0 bg-background/70"></div>
     <div class="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-background sm:h-40 lg:h-48"></div>
 
-    <div class="relative z-10 mx-auto max-w-4xl px-4 py-20 sm:py-28 lg:py-32">
+    <div class="relative z-10 w-full max-w-4xl px-4 py-20 sm:py-28 lg:py-32">
         <h1
             class="font-display text-5xl font-semibold leading-tight tracking-tight text-foreground sm:text-6xl lg:text-7xl"
         >
