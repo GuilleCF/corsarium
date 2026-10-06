@@ -44,7 +44,7 @@ const groups = voyages.map((voyage) => ({
                                     <a
                                         href={`/voyages/${voyage.id}/${expedition}`}
                                         aria-current={isActive ? "page" : undefined}
-                                        class="block rounded-md px-3 py-2 text-foreground-secondary aria-[current=page]:bg-surface-alt aria-[current=page]:font-medium aria-[current=page]:text-foreground hover:text-foreground"
+                                        class="block border-l-2 border-transparent px-3 py-2 text-foreground-secondary aria-[current=page]:border-accent aria-[current=page]:font-medium aria-[current=page]:text-foreground hover:text-foreground"
                                     >
                                         {entry.data.order}. {entry.data.title}
                                     </a>
