@@ -44,7 +44,7 @@ const nextExpedition = currentIndex < voyageExpeditions.length - 1 ? voyageExped
 ---
 
 <BaseLayout title={`Corsarium | ${expedition.data.title}`} description={expedition.data.description}>
-    <div class={`grid lg:grid-cols-[20rem_1fr] ${hasToc ? "xl:grid-cols-[20rem_1fr_18rem]" : ""}`}>
+    <div class="grid lg:grid-cols-[20rem_1fr] xl:grid-cols-[20rem_1fr_18rem]">
         <aside>
             <Sidebar currentVoyage={voyage} currentExpeditionId={expedition.id} />
         </aside>

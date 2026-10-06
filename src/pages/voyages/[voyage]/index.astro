@@ -23,7 +23,7 @@ const expeditions = (await getCollection("expeditions", (entry) => parseExpediti
 ---
 
 <BaseLayout title={`Corsarium | ${meta.title}`} description={meta.description}>
-    <div class="grid lg:grid-cols-[20rem_1fr]">
+    <div class="grid lg:grid-cols-[20rem_1fr] xl:grid-cols-[20rem_1fr_18rem]">
         <aside>
             <Sidebar currentVoyage={voyage} />
         </aside>
