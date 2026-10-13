@@ -1,4 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-    <circle cx="16" cy="16" r="15" fill="#0A1112" stroke="#57D6C4" stroke-width="1.5" />
-    <path d="M16 8 L19.5 16 L16 24 L12.5 16 Z" fill="#D0A957" />
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="90 110 1080 1080">
+<defs>
+<linearGradient id="fv-sail" x1="0" y1="0" x2=".6" y2="1"><stop offset="0" stop-color="#7cf0de"></stop><stop offset="1" stop-color="#14a89c"></stop></linearGradient>
+<linearGradient id="fv-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7c255"></stop><stop offset="1" stop-color="#b97a1f"></stop></linearGradient>
+</defs>
+<rect x="90" y="110" width="1080" height="1080" rx="238" fill="#03090a"></rect>
+<g fill="url(#fv-sail)">
+<path d="M230 213C430 285 630 430 690 610V748C565 768 440 845 325 910 430 780 470 610 425 470 390 365 320 275 230 213Z"></path>
+<path d="M572 318C725 392 845 505 885 645V775C795 788 700 838 625 882 722 762 735 610 695 485 668 410 625 355 572 318Z"></path>
+<path d="M818 458C932 528 1022 650 1045 785 960 788 900 812 848 848 922 760 928 640 893 560 873 515 848 482 818 458Z"></path>
+</g>
+<path d="M112 886C330 915 620 925 820 885 962 857 1070 812 1146 753 1080 872 960 950 760 990 560 1026 300 960 112 886Z" fill="url(#fv-gold)"></path>
+<path d="M95 942C300 962 450 1060 640 1080S990 1000 1160 945" fill="none" stroke="#3fe3d1" stroke-width="22" stroke-linecap="round"></path>
 </svg>
