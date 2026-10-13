@@ -10,5 +10,5 @@
 <path d="M818 458C932 528 1022 650 1045 785 960 788 900 812 848 848 922 760 928 640 893 560 873 515 848 482 818 458Z"></path>
 </g>
 <path d="M112 886C330 915 620 925 820 885 962 857 1070 812 1146 753 1080 872 960 950 760 990 560 1026 300 960 112 886Z" fill="url(#fv-gold)"></path>
-<path d="M95 942C300 962 450 1060 640 1080S990 1000 1160 945" fill="none" stroke="#3fe3d1" stroke-width="22" stroke-linecap="round"></path>
+<path d="M95 942C300 962 450 1060 640 1080S990 1000 1160 945" fill="none" transform="translate(0 20)" stroke="#3fe3d1" stroke-width="36" stroke-linecap="round"></path>
 </svg>
