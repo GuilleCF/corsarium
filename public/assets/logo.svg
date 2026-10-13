@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="80 200 1095 940" role="img" aria-label="Corsarium">
+<defs>
+<linearGradient id="em-sail" x1="0" y1="0" x2=".6" y2="1"><stop offset="0" stop-color="#7cf0de"></stop><stop offset=".45" stop-color="#2fcfbd"></stop><stop offset="1" stop-color="#0c958c"></stop></linearGradient>
+<linearGradient id="em-gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f7c255"></stop><stop offset=".45" stop-color="#e9a83a"></stop><stop offset=".8" stop-color="#b97a1f"></stop><stop offset="1" stop-color="#7a4f12"></stop></linearGradient>
+<linearGradient id="em-wave" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0f8f88" stop-opacity=".2"></stop><stop offset=".45" stop-color="#3fe3d1"></stop><stop offset="1" stop-color="#0f8f88" stop-opacity=".25"></stop></linearGradient>
+<filter id="em-blur" x="-10%" y="-50%" width="120%" height="200%"><feGaussianBlur stdDeviation="9"></feGaussianBlur></filter>
+</defs>
+<g fill="url(#em-sail)">
+<path d="M230 213C430 285 630 430 690 610C700 660 694 710 690 748C565 768 440 845 325 910 430 780 470 610 425 470 390 365 320 275 230 213Z"></path>
+<path d="M572 318C725 392 845 505 885 645C892 700 888 745 885 775C795 788 700 838 625 882 722 762 735 610 695 485 668 410 625 355 572 318Z"></path>
+<path d="M818 458C932 528 1022 650 1045 785 960 788 900 812 848 848 922 760 928 640 893 560 873 515 848 482 818 458Z"></path>
+</g>
+<path d="M112 886C330 915 620 925 820 885 962 857 1070 812 1146 753 1080 872 960 950 760 990 560 1026 300 960 112 886Z" fill="url(#em-gold)"></path>
+<g fill="none" stroke-linecap="round">
+<path d="M95 942C300 962 450 1060 640 1080S990 1000 1160 945" stroke="url(#em-wave)" stroke-width="16" opacity=".7" filter="url(#em-blur)"></path>
+<path d="M95 942C300 962 450 1060 640 1080S990 1000 1160 945" stroke="url(#em-wave)" stroke-width="6"></path>
+<path d="M150 978C330 1012 480 1112 680 1122S1000 1052 1150 1010" stroke="url(#em-wave)" stroke-width="3" opacity=".55"></path>
+</g>
+</svg>
