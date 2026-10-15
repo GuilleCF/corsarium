@@ -3,21 +3,9 @@ import Button from "@/components/Button.astro";
 ---
 
 <section data-hero class="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden text-center">
-    <img
-        src="/assets/corsarium-bg-light.svg"
-        alt=""
-        aria-hidden="true"
-        class="hero-bg-light absolute inset-0 h-full w-full object-cover"
-    />
-    <img
-        src="/assets/corsarium-bg-dark.svg"
-        alt=""
-        aria-hidden="true"
-        class="hero-bg-dark absolute inset-0 h-full w-full object-cover"
-    />
-    <div class="hero-overlay-light absolute inset-0 bg-background/40"></div>
-    <div class="hero-overlay-dark absolute inset-0 bg-background/70"></div>
-    <div class="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-background sm:h-40 lg:h-48"></div>
+    <div class="hero-bg absolute inset-0"></div>
+    <div class="absolute inset-0 bg-background/40 dark:bg-background/70"></div>
+    <div class="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-surface-alt sm:h-40 lg:h-48"></div>
 
     <div class="relative z-10 w-full max-w-4xl px-4 py-20 sm:py-28 lg:py-32">
         <h1
@@ -38,27 +26,27 @@ import Button from "@/components/Button.astro";
 </section>
 
 <style>
-    .hero-bg-dark {
-        display: none;
+    /* A CSS background only downloads the image that applies. Two <img> tags download both, even with display: none */
+    .hero-bg {
+        background: url("/assets/corsarium-bg-light.svg") center / cover no-repeat;
     }
 
-    .hero-overlay-dark {
-        display: none;
+    :root[data-theme="dark"] .hero-bg {
+        background-image: url("/assets/corsarium-bg-dark.svg");
     }
 
-    :root[data-theme="dark"] .hero-bg-light {
-        display: none;
-    }
+    /* On portrait screens (phones and upright tablets), cover crops to the empty middle of the scene. Scale by width instead and anchor to the bottom, so the ship stays in view */
+    /* The area above the image is filled with the illustration's own sky color (raw hex on purpose: it belongs to the SVG, not to the design tokens) */
+    @media (orientation: portrait) {
+        .hero-bg {
+            background-color: #EAF2F1;
+            background-size: 200% auto;
+            /* Pushed 3.5rem below the bottom edge, so a cloud near the top of the image doesn't sit behind the subtitle */
+            background-position: 72% calc(100% + 3.5rem);
+        }
 
-    :root[data-theme="dark"] .hero-bg-dark {
-        display: block;
-    }
-
-    :root[data-theme="dark"] .hero-overlay-light {
-        display: none;
-    }
-
-    :root[data-theme="dark"] .hero-overlay-dark {
-        display: block;
+        :root[data-theme="dark"] .hero-bg {
+            background-color: #0E1829;
+        }
     }
 </style>
