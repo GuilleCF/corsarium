@@ -11,6 +11,7 @@
     --color-tide: #284344;
     --color-glow: #57D6C4;
     --color-foam: #B8F1E7;
+    --color-haze: #C5D9D6;
     --color-brass: #D0A957;
     --color-sand: #E7D29B;
     --color-mist: #E8F0EF;
@@ -96,7 +97,8 @@ body:has([data-hero]) > header {
     --color-border: var(--color-tide);
     --color-border-strong: #5A7C7D;
     --color-foreground: var(--color-mist);
-    --color-foreground-secondary: var(--color-foam);
+    /* Near-neutral, so dark-mode body text and links don't take on a mint tint (foam was too saturated for running text) */
+    --color-foreground-secondary: var(--color-haze);
     --color-foreground-muted: var(--color-drift);
     --color-accent: var(--color-glow);
     --color-accent-hover: #7EE4D6;
