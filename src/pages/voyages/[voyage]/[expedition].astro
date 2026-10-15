@@ -43,8 +43,8 @@ const previousExpedition = currentIndex > 0 ? voyageExpeditions[currentIndex - 1
 const nextExpedition = currentIndex < voyageExpeditions.length - 1 ? voyageExpeditions[currentIndex + 1] : null;
 ---
 
-<BaseLayout title={`Corsarium | ${expedition.data.title}`} description={expedition.data.description}>
-    <div class="grid lg:grid-cols-[20rem_1fr] xl:grid-cols-[20rem_1fr_18rem]">
+<BaseLayout title={`${expedition.data.title} | Corsarium`} description={expedition.data.description}>
+    <div class="grid flex-1 lg:grid-cols-[auto_1fr] xl:grid-cols-[auto_1fr_18rem]">
         <aside>
             <Sidebar currentVoyage={voyage} currentExpeditionId={expedition.id} />
         </aside>
@@ -54,26 +54,28 @@ const nextExpedition = currentIndex < voyageExpeditions.length - 1 ? voyageExped
             <h1 class="mt-4 font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
                 {expedition.data.title}
             </h1>
-            <div class="prose dark:prose-invert prose-headings:text-foreground mt-8 text-foreground">
+            <div class="prose prose-headings:font-display mt-8">
                 <Content />
             </div>
-            <nav aria-label="Expedition navigation" class="mt-12 flex items-center justify-between border-t border-border pt-6 text-sm">
-                {previousExpedition ? (
+            <nav aria-label="Expedition navigation" class="mt-12 grid gap-4 border-t border-border pt-8 sm:grid-cols-2">
+                {previousExpedition && (
                     <a
                         href={`/voyages/${voyage}/${parseExpeditionId(previousExpedition.id).expedition}`}
-                        class="text-foreground-secondary hover:text-foreground"
+                        class="group flex flex-col gap-1 rounded-xl border border-border bg-surface p-4 transition-colors hover:border-accent"
                     >
-                        ← {previousExpedition.data.title}
+                        <span class="text-sm text-foreground-muted"><span aria-hidden="true">← </span>Previous</span>
+                        <span class="font-medium text-foreground group-hover:text-accent">{previousExpedition.data.title}</span>
                     </a>
-                ) : <span />}
-                {nextExpedition ? (
+                )}
+                {nextExpedition && (
                     <a
                         href={`/voyages/${voyage}/${parseExpeditionId(nextExpedition.id).expedition}`}
-                        class="text-foreground-secondary hover:text-foreground"
+                        class="group flex flex-col gap-1 rounded-xl border border-border bg-surface p-4 text-right transition-colors hover:border-accent sm:col-start-2"
                     >
-                        {nextExpedition.data.title} →
+                        <span class="text-sm text-foreground-muted">Next<span aria-hidden="true"> →</span></span>
+                        <span class="font-medium text-foreground group-hover:text-accent">{nextExpedition.data.title}</span>
                     </a>
-                ) : <span />}
+                )}
             </nav>
             </article>
         </div>

@@ -22,8 +22,8 @@ const expeditions = (await getCollection("expeditions", (entry) => parseExpediti
 );
 ---
 
-<BaseLayout title={`Corsarium | ${meta.title}`} description={meta.description}>
-    <div class="grid lg:grid-cols-[20rem_1fr] xl:grid-cols-[20rem_1fr_18rem]">
+<BaseLayout title={`${meta.title} | Corsarium`} description={meta.description}>
+    <div class="grid flex-1 lg:grid-cols-[auto_1fr] xl:grid-cols-[auto_1fr_18rem]">
         <aside>
             <Sidebar currentVoyage={voyage} />
         </aside>
@@ -32,20 +32,24 @@ const expeditions = (await getCollection("expeditions", (entry) => parseExpediti
             <h1 class="font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
                 {meta.title}
             </h1>
-            <h2 class="mt-6 text-sm font-semibold uppercase tracking-wide text-foreground-muted">Overview</h2>
-            <p class="mt-1 text-lg text-foreground-muted">
+            <p class="mt-4 text-lg text-foreground-muted">
                 {meta.description}
             </p>
 
-            <ol class="mt-8 flex flex-col gap-1 rounded-xl border border-border-strong bg-surface p-2">
+            {expeditions.length === 0 ? (
+                <p class="mt-8 rounded-xl border border-dashed border-border-strong bg-surface p-6 text-foreground-muted">
+                    The expeditions for this voyage are coming soon.
+                </p>
+            ) : (
+            <ol class="mt-8 flex flex-col gap-1 rounded-xl border border-border bg-surface p-2">
                 {expeditions.map((expedition) => (
                     <li>
                         <a
                             href={`/voyages/${voyage}/${parseExpeditionId(expedition.id).expedition}`}
-                            class="flex items-center gap-3 rounded-md px-3 py-2 text-foreground-secondary hover:bg-surface-alt hover:text-foreground"
+                            class="group flex items-start gap-3 rounded-md px-3 py-3 hover:bg-surface-alt"
                         >
                             <svg
-                                class="h-4 w-4 shrink-0"
+                                class="mt-1 h-4 w-4 shrink-0 text-accent"
                                 aria-hidden="true"
                                 focusable="false"
                                 xmlns="http://www.w3.org/2000/svg"
@@ -59,11 +63,18 @@ const expeditions = (await getCollection("expeditions", (entry) => parseExpediti
                                 <circle cx="12" cy="12" r="9"></circle>
                                 <polygon points="14.5 9.5 10.5 10.5 9.5 14.5 13.5 13.5"></polygon>
                             </svg>
-                            <span>{expedition.data.order}. {expedition.data.title}</span>
+                            {/* The description is what this list adds over the sidebar, which only shows titles */}
+                            <span class="flex flex-col gap-1">
+                                <span class="font-medium text-foreground group-hover:text-accent">
+                                    {expedition.data.order}. {expedition.data.title}
+                                </span>
+                                <span class="text-sm text-foreground-muted">{expedition.data.description}</span>
+                            </span>
                         </a>
                     </li>
                 ))}
             </ol>
+            )}
             </div>
         </div>
     </div>

@@ -22,19 +22,44 @@ const groups = voyages.map((voyage) => ({
 }));
 ---
 
-<div data-sidebar class="group relative pt-12 lg:h-full lg:w-80 lg:pt-0 lg:data-[open=true]:border-r lg:data-[open=true]:border-border">
-    <div class="absolute left-6 top-4 lg:group-data-[open=true]:left-[calc(20rem+1.5rem)]">
+{/*
+    The page grid sizes this column to the sidebar's own width (auto), so closing it on desktop
+    shrinks the column to just the toggle (w-20) and the content column takes the freed space.
+*/}
+<div data-sidebar class="group relative pt-12 lg:h-full lg:w-80 lg:pt-0 lg:data-[open=false]:w-20 lg:data-[open=true]:border-r lg:data-[open=true]:border-border">
+    {/* When open on desktop, the toggle sits in the sidebar's top-right corner instead of over the content column */}
+    <div class="absolute left-6 top-4 lg:group-data-[open=true]:left-auto lg:group-data-[open=true]:right-4">
         <SidebarToggle />
     </div>
 
-    <div id="sidebar-panel" data-sidebar-panel class="px-4 py-6">
+    {/* On mobile the open panel is a card, so it reads as navigation rather than part of the article */}
+    <div id="sidebar-panel" data-sidebar-panel class="mx-4 mt-2 rounded-xl border border-border bg-surface px-2 py-4 lg:mx-0 lg:mt-0 lg:rounded-none lg:border-0 lg:bg-transparent lg:px-4 lg:py-6 lg:pt-14">
         <nav aria-label="Voyages" class="text-sm">
-            {groups.map(({ voyage, items }) => (
-                <details open={voyage.id === currentVoyage} class="mb-2">
-                    <summary class="cursor-pointer list-none rounded-md px-3 py-2 font-medium text-foreground-secondary hover:bg-surface-alt hover:text-foreground [&::-webkit-details-marker]:hidden">
+            {groups.map(({ voyage, items }) => {
+                const isCurrentVoyage = voyage.id === currentVoyage;
+                const isOverview = isCurrentVoyage && !currentExpeditionId;
+
+                return (
+                <details open={isCurrentVoyage} class="mb-2">
+                    <summary class:list={[
+                        "cursor-pointer list-none rounded-md px-3 py-2 font-medium hover:bg-surface-alt hover:text-foreground [&::-webkit-details-marker]:hidden",
+                        isCurrentVoyage ? "text-foreground" : "text-foreground-secondary",
+                    ]}>
                         {voyage.data.title}
                     </summary>
                     <ol class="mt-1 flex flex-col gap-1 pl-3">
+                        <li>
+                            <a
+                                href={`/voyages/${voyage.id}`}
+                                aria-current={isOverview ? "page" : undefined}
+                                class="block border-l-2 border-transparent px-3 py-2 text-foreground-secondary aria-[current=page]:border-accent aria-[current=page]:font-medium aria-[current=page]:text-foreground hover:text-foreground"
+                            >
+                                Overview
+                            </a>
+                        </li>
+                        {items.length === 0 && (
+                            <li class="border-l-2 border-transparent px-3 py-2 text-foreground-muted">Expeditions coming soon</li>
+                        )}
                         {items.map((entry) => {
                             const { expedition } = parseExpeditionId(entry.id);
                             const isActive = entry.id === currentExpeditionId;
@@ -53,31 +78,37 @@ const groups = voyages.map((voyage) => ({
                         })}
                     </ol>
                 </details>
-            ))}
+                );
+            })}
         </nav>
     </div>
 </div>
 
-<script>
-    // Open by default on desktop, closed on mobile so the article stays near the top.
-    // Re-applies that default when the window crosses the breakpoint.
-    const root = document.querySelector<HTMLElement>("[data-sidebar]");
-    const button = document.querySelector<HTMLButtonElement>("[data-sidebar-toggle]");
-    const panel = root?.querySelector<HTMLElement>("[data-sidebar-panel]");
-    const desktop = window.matchMedia("(min-width: 64rem)");
+<script is:inline>
+    // is:inline runs this as soon as the parser reaches it, before the first paint.
+    // A regular (deferred) script ran after paint, so on mobile the sidebar flashed open, then closed.
+    // The IIFE keeps these names out of the global scope, which inline scripts share.
+    (() => {
+        // Open by default on desktop, closed on mobile so the article stays near the top.
+        // Re-applies that default when the window crosses the breakpoint.
+        const root = document.querySelector("[data-sidebar]");
+        const button = document.querySelector("[data-sidebar-toggle]");
+        const panel = root?.querySelector("[data-sidebar-panel]");
+        const desktop = window.matchMedia("(min-width: 64rem)");
 
-    function setOpen(open: boolean) {
-        if (!root || !button || !panel) return;
+        function setOpen(open) {
+            if (!root || !button || !panel) return;
 
-        root.dataset.open = String(open);
-        panel.hidden = !open;
-        button.setAttribute("aria-expanded", String(open));
-        button.setAttribute("aria-label", open ? "Hide sidebar" : "Show sidebar");
-    }
+            root.dataset.open = String(open);
+            panel.hidden = !open;
+            button.setAttribute("aria-expanded", String(open));
+            button.setAttribute("aria-label", open ? "Hide sidebar" : "Show sidebar");
+        }
 
-    setOpen(desktop.matches);
-    button?.addEventListener("click", () => {
-        setOpen(root?.dataset.open !== "true");
-    });
-    desktop.addEventListener("change", (event) => setOpen(event.matches));
+        setOpen(desktop.matches);
+        button?.addEventListener("click", () => {
+            setOpen(root?.dataset.open !== "true");
+        });
+        desktop.addEventListener("change", (event) => setOpen(event.matches));
+    })();
 </script>
