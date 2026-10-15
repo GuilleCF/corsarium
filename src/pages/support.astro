@@ -1,14 +1,50 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import Card from "@/components/Card.astro";
+
+const repo = "https://github.com/GuilleCF/corsarium";
+
+// Ways to help that already work today, while other kinds of support are still to come
+const ways = [
+    {
+        title: "Star the project",
+        text: "A star on GitHub helps other learners find Corsarium.",
+        href: repo,
+    },
+    {
+        title: "Report a problem",
+        text: "Found a mistake, a broken link or something unclear? Open an issue.",
+        href: `${repo}/issues`,
+    },
+    {
+        title: "Contribute",
+        text: "Suggest improvements or send changes through a pull request.",
+        href: `${repo}/pulls`,
+    },
+];
 ---
 
-<BaseLayout title="Corsarium | Support us" description="Ways to support the Corsarium project.">
+<BaseLayout title="Support us | Corsarium" description="Ways to support the Corsarium project.">
     <section class="px-4 py-16 sm:py-20">
         <div class="mx-auto max-w-3xl">
             <h1 class="font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">Support us</h1>
             <p class="mt-6 text-lg text-foreground-muted">
-                Corsarium is open source and free to use. Ways to support the project are coming soon.
+                Corsarium is open source and free to use. Ways to support the project are coming soon. Until then, you can already help on GitHub.
             </p>
+
+            <ul class="mt-10 grid gap-6 sm:grid-cols-3">
+                {ways.map((way) => (
+                    <Card as="li" class="group relative transition-colors hover:border-accent has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-accent">
+                        <h2 class="font-display text-lg font-semibold text-foreground">
+                            {/* Stretched link: the ::after covers the whole card */}
+                            <a href={way.href} class="after:absolute after:inset-0 after:rounded-xl focus-visible:outline-hidden group-hover:text-accent">
+                                {way.title}
+                            </a>
+                        </h2>
+                        <p class="mt-2 text-sm text-foreground-muted">{way.text}</p>
+                    </Card>
+                ))}
+            </ul>
         </div>
     </section>
 </BaseLayout>
