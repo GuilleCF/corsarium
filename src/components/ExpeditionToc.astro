@@ -53,6 +53,20 @@ const indents: Record<number, string> = {
         if (current) linkById.get(current.id)?.setAttribute("aria-current", "location");
     }
 
-    window.addEventListener("scroll", updateActive, { passive: true });
+    // Run at most once per frame, however many scroll events fire in between
+    let frameRequested = false;
+
+    window.addEventListener(
+        "scroll",
+        () => {
+            if (frameRequested) return;
+            frameRequested = true;
+            requestAnimationFrame(() => {
+                updateActive();
+                frameRequested = false;
+            });
+        },
+        { passive: true },
+    );
     updateActive();
 </script>
