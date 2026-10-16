@@ -26,6 +26,8 @@ const ogImageURL = new URL("/og-default.png", Astro.site);
         <meta charset="utf-8" />
         <link rel="preload" href={interLatinUrl} as="font" type="font/woff2" crossorigin />
         <link rel="preload" href={spaceGroteskLatinUrl} as="font" type="font/woff2" crossorigin>
+        {/* Tints the mobile browser bar; the script below and ThemeToggle keep it in step with the theme */}
+        <meta name="theme-color" content="#F7FAFA" />
         <script is:inline>
             let stored = null;
             try {
@@ -44,6 +46,9 @@ const ogImageURL = new URL("/og-default.png", Astro.site);
                         : "light";
 
             document.documentElement.setAttribute("data-theme", theme);
+
+            // The stylesheet may not be loaded yet, so the two --color-background values are repeated here
+            document.querySelector('meta[name="theme-color"]')?.setAttribute("content", theme === "dark" ? "#0A1112" : "#F7FAFA");
         </script>
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
         <link rel="icon" href="/favicon.ico" />

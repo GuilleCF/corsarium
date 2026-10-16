@@ -87,6 +87,9 @@
         } catch {
             // Storage blocked: the theme still applies for this page view
         }
+        // The stylesheet is loaded by now, so the bar color can come from the token itself
+        const background = getComputedStyle(document.documentElement).getPropertyValue("--color-background").trim();
+        document.querySelector('meta[name="theme-color"]')?.setAttribute("content", background);
         syncAll(theme);
     }
 
