@@ -16,11 +16,20 @@
     --color-sand: #E7D29B;
     --color-mist: #E8F0EF;
     --color-drift: #9AAEAD;
+    --color-shoal: #1A3234;
+    --color-reef: #2F5153;
+    --color-coral: #FF8A62;
+    --color-periwinkle: #8FA0C4;
+    --color-dune: #211B11;
+    --color-dusk: #151A2C;
 
     /* Light palette (default) */
     --color-background: #F7FAFA;
     --color-surface: #FFFFFF;
-    --color-surface-alt: #EAF4F2;
+    --color-surface-alt: #E3F0ED;
+    /* Warm and cool surfaces and accents come from the hero illustration's sand, periwinkle and coral */
+    --color-surface-warm: #F6ECD6;
+    --color-surface-cool: #E9ECF8;
     --color-border: #D3E0DE;
     --color-border-strong: #738F8B;
     --color-foreground: #0A1112;
@@ -29,6 +38,9 @@
     --color-accent: #0E7C70;
     --color-accent-hover: #0A5F56;
     --color-accent-secondary: #8C6A1F;
+    /* Coral marks wayfinding (topic icons, step markers); periwinkle draws the dotted sea route */
+    --color-accent-warm: #B8492F;
+    --color-route: #4E61C2;
 
     --font-sans: "Inter Variable", system-ui, sans-serif;
     --font-display: "Space Grotesk Variable", system-ui, sans-serif;
@@ -50,6 +62,22 @@
     h1, h2, h3 {
         text-wrap: balance;
     }
+
+    /* Text selection follows the palette instead of the browser's default blue */
+    ::selection {
+        background-color: var(--color-accent);
+        color: var(--color-background);
+    }
+}
+
+/* The dotted sea route from the hero illustration, as a horizontal or vertical line.
+   The element needs a size: a height of 4px for route-x, a width of 4px for route-y */
+@utility route-x {
+    background: radial-gradient(circle, var(--color-route) 1.5px, transparent 2px) left center / 12px 4px repeat-x;
+}
+
+@utility route-y {
+    background: radial-gradient(circle, var(--color-route) 1.5px, transparent 2px) center top / 4px 12px repeat-y;
 }
 
 /* Lesson typography uses the site tokens, so it follows the theme like everything else */
@@ -92,9 +120,12 @@ body:has([data-hero]) > header {
 :root[data-theme="dark"] {
     color-scheme: dark;
     --color-background: var(--color-abyss);
-    --color-surface: var(--color-deep-water);
+    /* Raised surfaces are lighter than the bands they sit on, so cards don't dissolve into surface-alt */
+    --color-surface: var(--color-shoal);
     --color-surface-alt: var(--color-ocean);
-    --color-border: var(--color-tide);
+    --color-surface-warm: var(--color-dune);
+    --color-surface-cool: var(--color-dusk);
+    --color-border: var(--color-reef);
     --color-border-strong: #5A7C7D;
     --color-foreground: var(--color-mist);
     /* Near-neutral, so dark-mode body text and links don't take on a mint tint (foam was too saturated for running text) */
@@ -103,4 +134,6 @@ body:has([data-hero]) > header {
     --color-accent: var(--color-glow);
     --color-accent-hover: #7EE4D6;
     --color-accent-secondary: var(--color-brass);
+    --color-accent-warm: var(--color-coral);
+    --color-route: var(--color-periwinkle);
 }

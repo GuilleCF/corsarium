@@ -1,6 +1,6 @@
 ---
 interface Props {
-    tone?: "default" | "alt";
+    tone?: "default" | "alt" | "warm";
     labelledby?: string;
 }
 
@@ -10,6 +10,7 @@ const { tone = "default", labelledby } = Astro.props;
 const tones = {
     default: "bg-background",
     alt: "bg-surface-alt",
+    warm: "bg-surface-warm",
 };
 ---
 

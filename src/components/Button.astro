@@ -1,16 +1,26 @@
 ---
 interface Props {
     href: string;
+    variant?: "primary" | "secondary";
     class?: string;
 }
 
-const { href, class: className } = Astro.props;
+const { href, variant = "primary", class: className } = Astro.props;
+
+// Full class names written out so Tailwind's scanner can find them.
+// Both variants have a 2px border, so they're the same size side by side.
+// Secondary text uses foreground, not accent: teal text falls below 4.5:1 on the warm surface
+const variants = {
+    primary: "border-accent bg-accent text-background hover:border-accent-hover hover:bg-accent-hover",
+    secondary: "border-accent text-foreground hover:bg-accent hover:text-background",
+};
 ---
 
 <a
     href={href}
     class:list={[
-        "inline-flex items-center rounded-full bg-accent px-6 py-3 font-medium text-background transition-colors duration-200 hover:bg-accent-hover focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        "inline-flex items-center rounded-full border-2 px-6 py-2.5 font-medium transition-colors duration-200 focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+        variants[variant],
         className,
     ]}
 >
