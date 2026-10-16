@@ -102,7 +102,7 @@ const groups = voyages.map((voyage) => ({
             root.dataset.open = String(open);
             panel.hidden = !open;
             button.setAttribute("aria-expanded", String(open));
-            button.setAttribute("aria-label", open ? "Hide sidebar" : "Show sidebar");
+            button.setAttribute("aria-label", open ? "Hide contents" : "Show contents");
         }
 
         setOpen(desktop.matches);

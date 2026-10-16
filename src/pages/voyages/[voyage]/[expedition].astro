@@ -57,6 +57,8 @@ const nextExpedition = currentIndex < voyageExpeditions.length - 1 ? voyageExped
             <div class="prose prose-headings:font-display mt-8">
                 <Content />
             </div>
+            {/* Only rendered when there's somewhere to go: a lone expedition would leave an empty landmark and a stray divider */}
+            {(previousExpedition || nextExpedition) && (
             <nav aria-label="Expedition navigation" class="mt-12 grid gap-4 border-t border-border pt-8 sm:grid-cols-2">
                 {previousExpedition && (
                     <a
@@ -77,6 +79,7 @@ const nextExpedition = currentIndex < voyageExpeditions.length - 1 ? voyageExped
                     </a>
                 )}
             </nav>
+            )}
             </article>
         </div>
         {hasToc && <ExpeditionToc headings={headings} />}

@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Sidebar from "@/components/Sidebar.astro";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
 import { parseExpeditionId } from "@/lib/expeditions";
 
 export async function getStaticPaths() {
@@ -29,10 +30,11 @@ const expeditions = (await getCollection("expeditions", (entry) => parseExpediti
         </aside>
         <div class="min-w-0">
             <div class="mx-auto w-full max-w-3xl px-4 pb-16 pt-8 sm:pb-20">
-            <h1 class="font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
+            <Breadcrumbs voyage={voyage} voyageTitle={meta.title} />
+            <h1 class="mt-4 font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">
                 {meta.title}
             </h1>
-            <p class="mt-4 text-lg text-foreground-muted">
+            <p class="mt-4 text-lg text-foreground-secondary">
                 {meta.description}
             </p>
 

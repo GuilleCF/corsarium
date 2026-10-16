@@ -3,8 +3,8 @@
     data-sidebar-toggle
     aria-controls="sidebar-panel"
     aria-expanded="true"
-    aria-label="Hide sidebar"
-    class="relative grid h-9 w-9 shrink-0 place-items-center rounded-full text-foreground hover:bg-surface-alt focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent after:absolute after:-inset-1 after:content-['']"
+    aria-label="Hide contents"
+    class="relative inline-flex h-9 shrink-0 items-center gap-2 rounded-full px-3 text-sm font-medium text-foreground hover:bg-surface-alt focus-visible:outline-hidden focus-visible:ring-2 focus-visible:ring-accent after:absolute after:-inset-1 after:content-[''] lg:w-9 lg:justify-center lg:px-0"
 >
     <svg
         class="h-5 w-5"
@@ -19,4 +19,6 @@
         <rect x="3" y="3" width="18" height="18" rx="2" stroke-linecap="round" stroke-linejoin="round"></rect>
         <path d="M9 3v18" stroke-linecap="round" stroke-linejoin="round"></path>
     </svg>
+    {/* Visible on mobile, where the closed sidebar is just this button; the accessible name ("Show contents") contains this word */}
+    <span class="lg:hidden">Contents</span>
 </button>
