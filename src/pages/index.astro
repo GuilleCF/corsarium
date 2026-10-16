@@ -8,44 +8,10 @@ import Section from "@/components/Section.astro";
 import SectionHeading from "@/components/SectionHeading.astro";
 import { parseExpeditionId } from "@/lib/expeditions";
 
-// Each icon is the inner markup of a 24×24 line icon; the <svg> wrapper sets size, stroke and color
-const topics = [
-    {
-        title: "Foundations",
-        text: "Molecular biology and protein structure, explained from the beginning.",
-        icon: '<path d="M6 3c0 6 12 12 12 18"/><path d="M18 3c0 6-12 12-12 18"/><path d="M8 7h8"/><path d="M8 17h8"/>',
-    },
-    {
-        title: "Sequence analysis",
-        text: "How biological sequences are compared and interpreted.",
-        icon: '<path d="M4 7h4"/><path d="M11 7h9"/><path d="M4 12h10"/><path d="M17 12h3"/><path d="M4 17h6"/><path d="M13 17h7"/>',
-    },
-    {
-        title: "Structural databases",
-        text: "Where experimental and predicted structures come from, such as the PDB and AlphaFold.",
-        icon: '<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5"/><path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>',
-    },
-    {
-        title: "Molecular visualization",
-        text: "How to look at molecular structures and read what they show.",
-        icon: '<circle cx="12" cy="6" r="2.5"/><circle cx="6" cy="17" r="2.5"/><circle cx="18" cy="17" r="2.5"/><path d="m10.8 8.2-3.6 6.6"/><path d="m13.2 8.2 3.6 6.6"/><path d="M8.5 17h7"/>',
-    },
-    {
-        title: "Simulation and docking",
-        text: "How molecules move and interact, studied with molecular dynamics, docking and force fields.",
-        icon: '<path d="M3 12h4l3-8 4 16 3-8h4"/>',
-    },
-    {
-        title: "Tools and workflows",
-        text: "The command line, scientific programming and reproducible workflows behind the analyses.",
-        icon: '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3"/><path d="M13 15h4"/>',
-    },
-];
-
 const steps = [
     {
-        title: "Choose a path",
-        text: "Begin from zero, or jump in at the topic you want to learn or review.",
+        title: "Choose a voyage",
+        text: "Begin from zero with Foundations, or jump in at the voyage you want to learn or review.",
     },
     {
         title: "Learn step by step",
@@ -53,14 +19,15 @@ const steps = [
     },
     {
         title: "Apply the tools",
-        text: "Work through different analyses and the tools used to run them.",
+        text: "Run the analyses yourself, with the same tools researchers use.",
     },
 ];
 
+// Each icon is the inner markup of a 24×24 line icon; the <svg> wrapper sets size, stroke and color
 const audiences = [
     {
         title: "New to the field",
-        text: "Start with no prior knowledge. Corsarium will guide you step by step, from the first concepts to the different analyses and tools researchers use.",
+        text: "Start with no prior knowledge. Foundations introduces the biology and protein structure behind the simulations, one step at a time.",
         // Compass: finding your bearings
         icon: '<circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/>',
         panel: "bg-surface-cool",
@@ -74,7 +41,7 @@ const audiences = [
     },
 ];
 
-// Only titles and status are shown here: voyage descriptions are still placeholders
+// "What you'll learn" is the list of real voyages, so it can't promise a course that doesn't exist
 const voyages = (await getCollection("voyages")).sort((a, b) => a.data.order - b.data.order);
 const expeditions = await getCollection("expeditions");
 
@@ -83,44 +50,60 @@ function expeditionCount(voyageId: string) {
 }
 ---
 
-<BaseLayout title="Corsarium" description="An open educational platform for learning bioinformatics, with a focus on structural bioinformatics.">
+<BaseLayout title="Corsarium | Learn structural bioinformatics" description="An open platform for learning structural bioinformatics, from the foundations to molecular dynamics.">
     <Hero />
 
     <Section tone="alt" labelledby="learn-heading">
-        <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-16">
-            <div>
+        <div class="flex flex-wrap items-end justify-between gap-6">
+            <div class="max-w-2xl">
                 <SectionHeading id="learn-heading">What you'll learn</SectionHeading>
-                <p class="mt-4 max-w-md text-lg text-foreground-muted">
-                    Corsarium will cover structural bioinformatics from the foundations to the analyses and tools used in research.
+                <p class="mt-4 text-lg text-foreground-muted">
+                    Corsarium is organized into voyages. Each voyage is a path through one area of knowledge, made of expeditions you take in order.
                 </p>
             </div>
-
-            <ul class="grid gap-x-10 gap-y-9 sm:grid-cols-2">
-                {topics.map((topic) => (
-                    <li class="flex gap-4">
-                        <span class="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-surface-warm text-accent-warm">
-                            <svg
-                                class="h-6 w-6"
-                                aria-hidden="true"
-                                focusable="false"
-                                xmlns="http://www.w3.org/2000/svg"
-                                viewBox="0 0 24 24"
-                                fill="none"
-                                stroke="currentColor"
-                                stroke-width="1.75"
-                                stroke-linecap="round"
-                                stroke-linejoin="round"
-                                set:html={topic.icon}
-                            />
-                        </span>
-                        <div>
-                            <h3 class="font-display text-lg font-semibold text-foreground">{topic.title}</h3>
-                            <p class="mt-1.5 text-foreground-muted">{topic.text}</p>
-                        </div>
-                    </li>
-                ))}
-            </ul>
+            <a href="/voyages" class="font-medium text-accent underline-offset-4 hover:text-accent-hover hover:underline">
+                All voyages <span aria-hidden="true">→</span>
+            </a>
         </div>
+
+        {/* Each voyage is a stop on the route: vertical on small screens, horizontal from lg */}
+        <ol class="mt-12 grid gap-6 lg:grid-cols-3">
+            {voyages.map((voyage, index) => {
+                const count = expeditionCount(voyage.id);
+
+                return (
+                    <li class="relative flex gap-5 not-last:after:absolute not-last:after:top-14 not-last:after:-bottom-4 not-last:after:left-[22px] not-last:after:w-1 not-last:after:route-y lg:flex-col lg:not-last:after:top-[22px] lg:not-last:after:right-[-1.5rem] lg:not-last:after:bottom-auto lg:not-last:after:left-16 lg:not-last:after:h-1 lg:not-last:after:w-auto lg:not-last:after:route-x">
+                        <span aria-hidden="true" class="grid h-12 w-12 shrink-0 place-items-center rounded-full border-2 border-route bg-background font-display text-lg font-semibold text-route">
+                            {index + 1}
+                        </span>
+                        <Card class="group relative flex flex-1 flex-col transition-colors hover:border-accent has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-accent">
+                            <h3 class="font-display text-xl font-semibold text-foreground">
+                                {/* The ::after covers the whole card, so the full card is clickable while only the title is the link text */}
+                                <a
+                                    href={`/voyages/${voyage.id}`}
+                                    class="after:absolute after:inset-0 after:rounded-xl focus-visible:outline-hidden group-hover:text-accent"
+                                >
+                                    {voyage.data.title}
+                                </a>
+                            </h3>
+                            <p class="mt-3 text-foreground-muted">{voyage.data.description}</p>
+                            {/* mt-auto keeps the status on the bottom edge, so it lines up across cards of different heights */}
+                            <div class="mt-auto pt-5">
+                                {count === 0 ? (
+                                    <p class="inline-flex rounded-full border border-border bg-surface-alt px-3 py-1 text-xs font-medium text-foreground-secondary">
+                                        Coming soon
+                                    </p>
+                                ) : (
+                                    <p class="text-sm font-medium text-accent">
+                                        {count} {count === 1 ? "expedition" : "expeditions"}
+                                    </p>
+                                )}
+                            </div>
+                        </Card>
+                    </li>
+                );
+            })}
+        </ol>
     </Section>
 
     <Section labelledby="how-heading">
@@ -128,7 +111,7 @@ function expeditionCount(voyageId: string) {
             <div>
                 <SectionHeading id="how-heading">How it works</SectionHeading>
                 <p class="mt-4 max-w-md text-lg text-foreground-muted">
-                    Learning paths will be organized from first steps to advanced topics, so you can start where you are.
+                    Voyages go from first steps to advanced topics, so you can start where you are.
                 </p>
             </div>
 
@@ -149,56 +132,7 @@ function expeditionCount(voyageId: string) {
         </div>
     </Section>
 
-    <Section tone="alt" labelledby="voyages-heading">
-        <div class="flex flex-wrap items-end justify-between gap-6">
-            <div class="max-w-2xl">
-                <SectionHeading id="voyages-heading">Chart your course</SectionHeading>
-                <p class="mt-4 text-lg text-foreground-muted">
-                    Lessons are grouped into voyages. Each voyage is a learning path made of expeditions, taken one after another.
-                </p>
-            </div>
-            <a href="/voyages" class="font-medium text-accent underline-offset-4 hover:text-accent-hover hover:underline">
-                All voyages <span aria-hidden="true">→</span>
-            </a>
-        </div>
-
-        {/* Each voyage is a stop on the route: vertical on small screens, horizontal from lg */}
-        <ol class="mt-12 grid gap-6 lg:grid-cols-3">
-            {voyages.map((voyage, index) => {
-                const count = expeditionCount(voyage.id);
-
-                return (
-                    <li class="relative flex gap-5 not-last:after:absolute not-last:after:top-14 not-last:after:-bottom-4 not-last:after:left-[22px] not-last:after:w-1 not-last:after:route-y lg:flex-col lg:not-last:after:top-[22px] lg:not-last:after:right-[-1.5rem] lg:not-last:after:bottom-auto lg:not-last:after:left-16 lg:not-last:after:h-1 lg:not-last:after:w-auto lg:not-last:after:route-x">
-                        <span aria-hidden="true" class="grid h-12 w-12 shrink-0 place-items-center rounded-full border-2 border-route bg-background font-display text-lg font-semibold text-route">
-                            {index + 1}
-                        </span>
-                        <Card class="group relative flex-1 transition-colors hover:border-accent has-[a:focus-visible]:outline-2 has-[a:focus-visible]:outline-offset-2 has-[a:focus-visible]:outline-accent">
-                            <h3 class="font-display text-xl font-semibold text-foreground">
-                                {/* The ::after covers the whole card, so the full card is clickable while only the title is the link text */}
-                                <a
-                                    href={`/voyages/${voyage.id}`}
-                                    class="after:absolute after:inset-0 after:rounded-xl focus-visible:outline-hidden group-hover:text-accent"
-                                >
-                                    {voyage.data.title}
-                                </a>
-                            </h3>
-                            {count === 0 ? (
-                                <p class="mt-4 inline-flex rounded-full border border-border bg-surface-alt px-3 py-1 text-xs font-medium text-foreground-secondary">
-                                    Coming soon
-                                </p>
-                            ) : (
-                                <p class="mt-4 text-sm font-medium text-accent">
-                                    {count} {count === 1 ? "expedition" : "expeditions"}
-                                </p>
-                            )}
-                        </Card>
-                    </li>
-                );
-            })}
-        </ol>
-    </Section>
-
-    <Section labelledby="audience-heading">
+    <Section tone="alt" labelledby="audience-heading">
         <div class="max-w-2xl">
             <SectionHeading id="audience-heading">Who it's for</SectionHeading>
             <p class="mt-4 text-lg text-foreground-muted">
@@ -239,7 +173,7 @@ function expeditionCount(voyageId: string) {
                 <SectionHeading id="open-heading">Open and free</SectionHeading>
             </div>
             <p class="mt-4 max-w-2xl text-lg text-foreground-muted">
-                Corsarium is open source and free to use. The code is public on GitHub under the MIT License, and you can follow the project, report problems or contribute.
+                Corsarium is open source and free to use. The code is public on GitHub under the MIT License, and you can follow the project, report problems, or contribute.
             </p>
 
             <div class="mt-8 flex flex-wrap justify-center gap-4">
