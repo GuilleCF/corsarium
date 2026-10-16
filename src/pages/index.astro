@@ -41,7 +41,7 @@ const audiences = [
     },
 ];
 
-// "What you'll learn" is the list of real voyages, so it can't promise a course that doesn't exist
+// "What you’ll learn" is the list of real voyages, so it can't promise a course that doesn't exist
 const voyages = (await getCollection("voyages")).sort((a, b) => a.data.order - b.data.order);
 const expeditions = await getCollection("expeditions");
 
@@ -56,12 +56,12 @@ function expeditionCount(voyageId: string) {
     <Section tone="alt" labelledby="learn-heading">
         <div class="flex flex-wrap items-end justify-between gap-6">
             <div class="max-w-2xl">
-                <SectionHeading id="learn-heading">What you'll learn</SectionHeading>
-                <p class="mt-4 text-lg text-foreground-muted">
+                <SectionHeading id="learn-heading">What you’ll learn</SectionHeading>
+                <p class="mt-4 text-lg text-foreground-secondary">
                     Corsarium is organized into voyages. Each voyage is a path through one area of knowledge, made of expeditions you take in order.
                 </p>
             </div>
-            <a href="/voyages" class="font-medium text-accent underline-offset-4 hover:text-accent-hover hover:underline">
+            <a href="/voyages" class="font-medium text-accent-hover underline-offset-4 hover:underline">
                 All voyages <span aria-hidden="true">→</span>
             </a>
         </div>
@@ -110,7 +110,7 @@ function expeditionCount(voyageId: string) {
         <div class="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,2fr)] lg:gap-16">
             <div>
                 <SectionHeading id="how-heading">How it works</SectionHeading>
-                <p class="mt-4 max-w-md text-lg text-foreground-muted">
+                <p class="mt-4 max-w-md text-lg text-foreground-secondary">
                     Voyages go from first steps to advanced topics, so you can start where you are.
                 </p>
             </div>
@@ -134,8 +134,8 @@ function expeditionCount(voyageId: string) {
 
     <Section tone="alt" labelledby="audience-heading">
         <div class="max-w-2xl">
-            <SectionHeading id="audience-heading">Who it's for</SectionHeading>
-            <p class="mt-4 text-lg text-foreground-muted">
+            <SectionHeading id="audience-heading">Who it’s for</SectionHeading>
+            <p class="mt-4 text-lg text-foreground-secondary">
                 Corsarium will guide you through structural bioinformatics, whether you are just starting out or already working in the field.
             </p>
         </div>
@@ -172,7 +172,7 @@ function expeditionCount(voyageId: string) {
             <div class="mt-6">
                 <SectionHeading id="open-heading">Open and free</SectionHeading>
             </div>
-            <p class="mt-4 max-w-2xl text-lg text-foreground-muted">
+            <p class="mt-4 max-w-2xl text-lg text-foreground-secondary">
                 Corsarium is open source and free to use. The code is public on GitHub under the MIT License, and you can follow the project, report problems, or contribute.
             </p>
 

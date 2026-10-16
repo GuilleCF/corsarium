@@ -1,10 +1,11 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
+import Button from "@/components/Button.astro";
 ---
 
 <BaseLayout title="About | Corsarium" description="About Corsarium, an open educational platform for structural bioinformatics.">
     <article class="mx-auto w-full max-w-3xl px-4 py-16 sm:py-24">
-        <header class="text-center">
+        <header>
             <h1 class="font-display text-4xl font-semibold tracking-tight text-foreground sm:text-5xl">About Corsarium</h1>
         </header>
 
@@ -17,7 +18,7 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
                 Molecules are constantly moving, interacting, and changing at scales far beyond what we can experience ourselves. Yet, through computational methods, we can build a window into this hidden world and begin to explore its dynamics.
             </p>
 
-            <p class="border-l-4 border-accent pl-6 font-display text-xl font-semibold text-foreground">
+            <p class="font-display text-xl font-semibold text-foreground">
                 Corsarium was born from that idea.
             </p>
 
@@ -52,7 +53,8 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
             <p class="font-display text-2xl font-semibold tracking-tight text-accent-secondary sm:text-3xl">
                 Learn. Explore. Become a Corsair.
             </p>
-            <p class="mt-4 text-lg text-foreground-muted">Welcome to Corsarium.</p>
+            <p class="mt-4 text-lg text-foreground-secondary">Welcome to Corsarium.</p>
+            <Button href="/voyages" class="mt-8">Begin your journey</Button>
         </footer>
     </article>
 </BaseLayout>
