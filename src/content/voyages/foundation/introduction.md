@@ -1,6 +1,6 @@
 ---
 title: Welcome to Foundations
-description: "Description"
+description: "An introduction to the Foundations voyage and what it covers."
 order: 1
 ---
 

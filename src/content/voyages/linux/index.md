@@ -1,5 +1,5 @@
 ---
 title: "Linux for structural bioinformatics"
-description: "description"
+description: "The command line and the Linux environment where structural bioinformatics tools run."
 order: 2
 ---
