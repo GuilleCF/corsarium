@@ -2,14 +2,16 @@
 import Button from "@/components/Button.astro";
 ---
 
-<section data-hero class="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden text-center">
+{/* On portrait screens the text moves to the top, so the ship can fill the lower half without sitting behind it */}
+<section data-hero class="relative flex min-h-dvh flex-col items-center justify-center overflow-hidden text-center portrait:justify-start">
     <div class="hero-bg absolute inset-0"></div>
     <div class="absolute inset-0 bg-background/40 dark:bg-background/70"></div>
     <div class="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-b from-transparent to-surface-alt sm:h-40 lg:h-48"></div>
 
-    <div class="relative z-10 w-full max-w-4xl px-4 py-20 sm:py-28 lg:py-32">
+    <div class="relative z-10 w-full max-w-4xl px-4 py-20 sm:py-28 lg:py-32 portrait:pt-24">
+        {/* 40px on phones keeps "nanoscale world" on one line, so the headline wraps to two lines, not three */}
         <h1
-            class="font-display text-5xl font-semibold leading-tight tracking-tight text-foreground sm:text-6xl lg:text-7xl"
+            class="font-display text-[2.5rem] font-semibold leading-tight tracking-tight text-foreground sm:text-6xl lg:text-7xl"
         >
             Set sail into the
             <span class="block text-accent-secondary">
@@ -35,18 +37,28 @@ import Button from "@/components/Button.astro";
         background-image: url("/assets/corsarium-bg-dark.svg");
     }
 
-    /* On portrait screens (phones and upright tablets), cover crops to the empty middle of the scene. Scale by width instead and anchor to the bottom, so the ship stays in view */
+    /* On portrait screens (phones and upright tablets), cover crops to the empty middle of the scene.
+       Instead, zoom in on the ship's island (the right of the scene) and anchor it to the bottom right,
+       under the text, which moves to the top. min() stops the zoom growing too large on tablets */
     /* The area above the image is filled with the illustration's own sky color (raw hex on purpose: it belongs to the SVG, not to the design tokens) */
     @media (orientation: portrait) {
         .hero-bg {
             background-color: #EAF2F1;
-            background-size: 200% auto;
-            /* Pushed 3.5rem below the bottom edge, so a cloud near the top of the image doesn't sit behind the subtitle */
-            background-position: 72% calc(100% + 3.5rem);
+            background-size: min(300%, 1700px) auto;
+            /* The image's bottom edge sits 4rem above the hero's, so the island clears the fade into the next section */
+            background-position: right 0 bottom 4rem;
         }
 
         :root[data-theme="dark"] .hero-bg {
             background-color: #0E1829;
+        }
+    }
+
+    /* Short phones (e.g. 375×667) have less room under the text: a smaller ship, anchored to the bottom edge */
+    @media (orientation: portrait) and (max-height: 740px) {
+        .hero-bg {
+            background-size: 220% auto;
+            background-position: right bottom;
         }
     }
 </style>
